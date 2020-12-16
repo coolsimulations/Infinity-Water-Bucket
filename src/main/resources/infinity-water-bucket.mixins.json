@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.alkyaly.infinitywaterbucket.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BucketItemMixin",
+    "InfinityEnchantmentMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

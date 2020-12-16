@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "infinitywaterbucket",
+  "version": "${version}",
+  "name": "Infinity Water Bucket",
+  "description": "Allows the enchantment Infinity for Water Buckets, providing an infinite portable water source",
+  "authors": [ "alkyaLy" ],
+  "contact": {
+    "sources": "https://github.com/alkyaly/Infinity-Water-Bucket",
+    "issues": "https://github.com/alkyaly/Infinity-Water-Bucket/issues"
+  },
+  "license": "CC BY-NC-SA 3.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "mixins": [ "infinity-water-bucket.mixins.json" ],
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": ">=1.16.2"
+  }
+}
