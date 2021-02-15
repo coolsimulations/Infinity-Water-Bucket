@@ -1,4 +1,4 @@
-package com.github.alkyaly.infinitywaterbucket.mixin;
+package io.github.alkyaly.infinitywaterbucket.mixin;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
