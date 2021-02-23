@@ -15,12 +15,15 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CauldronBlock.class)
-public class CauldronBlockMixin {
+public abstract class CauldronBlockMixin {
+
+    @Shadow public abstract void setLevel(World world, BlockPos pos, BlockState state, int level);
 
     @Inject(
         at = @At(
@@ -35,7 +38,7 @@ public class CauldronBlockMixin {
         ItemStack stack = player.getStackInHand(hand);
         if (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0) {
             player.incrementStat(Stats.FILL_CAULDRON);
-            ((CauldronBlock)(Object)this).setLevel(world, pos, state, 3);
+            setLevel(world, pos, state, 3);
             world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
             info.setReturnValue(ActionResult.PASS);
         }

@@ -6,7 +6,7 @@
   "mixins": [
     "BucketItemMixin",
     "CauldronBlockMixin",
-    "InfinityEnchantmentMixin"
+    "EnchantmentMixin"
   ],
   "injectors": {
     "defaultRequire": 1
