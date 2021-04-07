@@ -40,7 +40,7 @@ public abstract class CauldronBlockMixin {
             player.incrementStat(Stats.FILL_CAULDRON);
             setLevel(world, pos, state, 3);
             world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            info.setReturnValue(ActionResult.PASS);
+            info.setReturnValue(ActionResult.SUCCESS);
         }
 
     }

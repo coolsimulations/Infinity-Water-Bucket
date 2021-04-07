@@ -11,7 +11,12 @@
   },
   "license": "CC BY-NC-SA 3.0",
   "environment": "*",
-  
+
+  "entrypoints": {
+    "main": [
+      "io.github.alkyaly.infinitywaterbucket.InfinityWaterBucket"
+    ]
+  },
   "mixins": [ "infinity-water-bucket.mixins.json" ],
   "depends": {
     "fabricloader": ">=0.7.4",

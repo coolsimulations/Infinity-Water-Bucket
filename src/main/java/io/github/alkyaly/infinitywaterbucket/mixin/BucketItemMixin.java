@@ -21,7 +21,7 @@ public class BucketItemMixin extends Item {
 
     @Inject(at = @At("HEAD"), method = "getEmptiedStack", cancellable = true)
     private void getEmptiedStack(ItemStack stack, PlayerEntity player, CallbackInfoReturnable<ItemStack> info) {
-        if(player.abilities.creativeMode || (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.WATER_BUCKET)) {
+        if (player.abilities.creativeMode || (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.WATER_BUCKET)) {
             info.setReturnValue(stack);
         } else info.setReturnValue(new ItemStack(Items.BUCKET));
     }
