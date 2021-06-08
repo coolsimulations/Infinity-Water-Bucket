@@ -21,9 +21,8 @@ public class InfinityEnchantmentMixin extends EnchantmentMixin {
 }
 @Mixin(Enchantment.class)
 class EnchantmentMixin {
-
+    //Using Mixin inheritance so we can keep compatibility with mods that override this.
     @Inject(at = @At("HEAD"), method = "isAcceptableItem", cancellable = true)
     protected void stub(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
     }
-
 }

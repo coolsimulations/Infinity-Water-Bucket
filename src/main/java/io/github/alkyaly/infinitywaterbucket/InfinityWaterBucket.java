@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 public class InfinityWaterBucket implements ModInitializer {
     @Override
     public void onInitialize() {
+        //Override the bucket fluid behavior, not really compatible with other mods that do the same thing
         DispenserBehavior dispenserBehavior = new DispenserBehavior() {
             private final ItemDispenserBehavior itemDispenserBehavior = new ItemDispenserBehavior();
             @Override
