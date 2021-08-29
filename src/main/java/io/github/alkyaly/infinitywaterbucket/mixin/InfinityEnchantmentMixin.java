@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class InfinityEnchantmentMixin extends EnchantmentMixin {
 
     @Override
-    protected void stub(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
+    protected void iwb$infinityStub(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
         if (stack.getItem() == Items.WATER_BUCKET) {
             info.setReturnValue(true);
         }
@@ -23,6 +23,6 @@ public class InfinityEnchantmentMixin extends EnchantmentMixin {
 class EnchantmentMixin {
     //Using Mixin inheritance so we can keep compatibility with mods that override this.
     @Inject(at = @At("HEAD"), method = "isAcceptableItem", cancellable = true)
-    protected void stub(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
+    protected void iwb$infinityStub(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
     }
 }

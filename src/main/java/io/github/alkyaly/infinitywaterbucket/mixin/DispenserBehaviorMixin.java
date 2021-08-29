@@ -2,23 +2,21 @@ package io.github.alkyaly.infinitywaterbucket.mixin;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.math.BlockPointer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BucketItem.class)
-public abstract class BucketItemMixin {
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$8")
+public class DispenserBehaviorMixin {
 
-    @Inject(at = @At("HEAD"), method = "getEmptiedStack", cancellable = true)
-    private static void iwb$getEmptiedStack(ItemStack stack, PlayerEntity player, CallbackInfoReturnable<ItemStack> info) {
+    @Inject(at = @At(value = "RETURN", ordinal = 0), method = "dispenseSilently", cancellable = true)
+    private void iwb$modifyWaterBucketBehavior(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.isOf(Items.WATER_BUCKET)) {
-            info.setReturnValue(stack);
+            cir.setReturnValue(stack);
         }
     }
 }
-
