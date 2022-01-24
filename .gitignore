@@ -1,0 +1,18 @@
+/build/
+/bin/
+/libs/
+/eclipse/
+/run/
+/.gradle/
+/.settings/
+/src/test/
+/out/
+.classpath
+.project
+.idea
+*.launch*
+*.gradleBOP
+*.propertiesBOP
+
+#OS generated files
+*.DS_Store

@@ -1,16 +1,19 @@
 {
   "required": true,
-  "minVersion": "0.8",
-  "package": "io.github.alkyaly.infinitywaterbucket.mixin",
+  "package": "net.coolsimulations.InfinityWaterBucket.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "AbstractCauldronBlockMixin",
     "BucketItemMixin",
-    "DispenserBehaviorMixin",
+    "DispenseItemBehavior16Mixin", "DispenseItemBehavior17Mixin",
     "EnchantmentMixin",
-    "InfinityEnchantmentMixin"
+    "ArrowInfiniteEnchantmentMixin",
+    "BucketableMixin", "AbstractFishMixin", "AxolotlMixin",
+    "ItemUtilsMixin",
+    "AbstractFurnaceBlockEntityMixin",
+    "PlayerListMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "minVersion": "0.8"
 }
