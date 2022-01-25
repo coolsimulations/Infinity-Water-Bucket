@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.5-SNAPSHOT'
+    id 'fabric-loom' version '0.7-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -10,53 +10,47 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+sourceSets.main.java.srcDirs += 'java'
+sourceSets.main.resources.srcDirs += 'resources'
+
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings minecraft.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation fileTree(dir: 'libs', include: '*.jar')
 
 }
 
 processResources {
     inputs.property "version", project.version
 
-    from(sourceSets.main.resources.srcDirs) {
-        include "fabric.mod.json"
+    filesMatching("fabric.mod.json") {
         expand "version": project.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude "fabric.mod.json"
     }
 }
 
 tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
+    it.options.encoding = "UTF-8"
+    if (JavaVersion.current().isJava9Compatible()) {
+        it.options.release = 8
+    }
 }
 
 jar {
-    from "LICENSE"
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-    }
+task packDev(type: Jar) {
+    from sourceSets.main.output
+    from sourceSets.main.allJava
+    classifier = "Dev"
+    version = "${project.version}"
 
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
-    }
+    println(defaultTasks)
+}
+
+artifacts {
+    archives packDev
 }

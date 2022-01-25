@@ -2,24 +2,49 @@
   "schemaVersion": 1,
   "id": "infinitywaterbucket",
   "version": "${version}",
+  
   "name": "Infinity Water Bucket",
   "description": "Allows the enchantment Infinity for Water Buckets, providing an infinite portable water source",
-  "authors": [ "alkyaLy" ],
+  "authors": [
+    "coolsim",
+    "alkyaLy"
+  ],
+  
   "contact": {
+    "homepage": "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket",
     "sources": "https://github.com/alkyaly/Infinity-Water-Bucket",
     "issues": "https://github.com/alkyaly/Infinity-Water-Bucket/issues"
   },
-  "license": "CC BY-NC-SA 3.0",
+  
+  "license": "All Rights Reserved",
+  "icon": "logo.png",
+  
   "environment": "*",
-
   "entrypoints": {
     "main": [
-      "io.github.alkyaly.infinitywaterbucket.InfinityWaterBucket"
+      "net.coolsimulations.InfinityWaterBucket.InfinityWaterBucket"
     ]
   },
-  "mixins": [ "infinity-water-bucket.mixins.json" ],
+
+  "mixins": [
+    "infinity-water-bucket.mixins.json"
+  ],
+  
   "depends": {
     "fabricloader": ">=0.7.4",
-    "minecraft": ">=1.16.2"
+    "minecraft": "1.16.x"
+  },
+  
+  "custom": {
+    "modupdater": {
+      "strategy": "curseforge",
+      "projectID": 423069
+    },
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/7DDsHfQ",
+        "modmenu.guilded": "https://guilded.gg/i/Wkn138B2"
+      }
+    }
   }
 }
