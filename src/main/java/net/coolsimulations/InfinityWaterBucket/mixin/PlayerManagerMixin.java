@@ -14,12 +14,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 @Mixin(PlayerManager.class)
 public class PlayerManagerMixin {
 
-	@Inject(at = @At("TAIL"), method = "onPlayerConnect", cancellable = true)
+	@Inject(at = @At("TAIL"), method = "method_12827", cancellable = true)
 	public void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo info) {
 
 		if(IWBUpdateHandler.isOld == true) {
-			if(player.getServer().isDedicated()) {
-				if(player.allowsPermissionLevel(player.getServer().getOpPermissionLevel())) {
+			if(player.server.isDedicated()) {
+				if(player.method_15592(player.server.getOpPermissionLevel())) {
 					messageOutdated(player);
 				}
 			} else {
@@ -30,7 +30,7 @@ public class PlayerManagerMixin {
 	
 	@Unique
 	private static void messageOutdated(ServerPlayerEntity player) {
-		player.sendMessage(IWBUpdateHandler.updateInfo);
-		player.sendMessage(IWBUpdateHandler.updateVersionInfo);
+		player.method_5505(IWBUpdateHandler.updateInfo);
+		player.method_5505(IWBUpdateHandler.updateVersionInfo);
 	}
 }

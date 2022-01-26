@@ -16,14 +16,14 @@ import net.minecraft.item.Items;
 @Mixin(BucketItem.class)
 public abstract class BucketItemMixin {
 
-    @Inject(at = @At("HEAD"), method = "getEmptiedStack", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "method_16030", cancellable = true)
     private void iwb$getEmptiedStack(ItemStack stack, PlayerEntity player, CallbackInfoReturnable<ItemStack> info) {
         if (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.WATER_BUCKET) {
             info.setReturnValue(stack);
         }
     }
     
-    @Inject(at = @At("HEAD"), method = "getFilledStack", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "fill", cancellable = true)
     private void iwb$getFilledStack(ItemStack stack, PlayerEntity player, Item filledBucket, CallbackInfoReturnable<ItemStack> info) {
         if (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.BUCKET) {
             info.setReturnValue(stack);

@@ -5,12 +5,11 @@
   "mixins": [
     "BucketItemMixin",
     "CauldronBlockMixin",
-    "DispenserBlockMixin",
     "EnchantmentMixin",
     "InfinityEnchantmentMixin",
     "FishEntityMixin",
     "CowEntityMixin",
-    "AbstractFurnaceBlockEntityMixin",
+    "FurnaceBlockEntityMixin",
     "PlayerManagerMixin"
   ],
   "injectors": {

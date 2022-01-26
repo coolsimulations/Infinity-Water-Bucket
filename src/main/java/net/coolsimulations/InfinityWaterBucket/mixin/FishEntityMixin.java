@@ -5,21 +5,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import net.minecraft.class_3460;
+import net.minecraft.class_3477;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.WaterCreatureEntity;
-import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-@Mixin(FishEntity.class)
+@Mixin(class_3477.class)
 public abstract class FishEntityMixin extends WaterCreatureEntity {
 	
-	protected FishEntityMixin(EntityType<? extends WaterCreatureEntity> entityType, World world) {
+	protected FishEntityMixin(class_3460<? extends WaterCreatureEntity> entityType, World world) {
 		super(entityType, world);
 	}
 

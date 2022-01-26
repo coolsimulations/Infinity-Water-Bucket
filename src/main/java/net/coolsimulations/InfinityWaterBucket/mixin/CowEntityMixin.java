@@ -5,9 +5,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import net.minecraft.class_3460;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 @Mixin(CowEntity.class)
 public abstract class CowEntityMixin extends AnimalEntity {
 
-	protected CowEntityMixin(EntityType<? extends AnimalEntity> type, World world) {
+	protected CowEntityMixin(class_3460<? extends AnimalEntity> type, World world) {
 		super(type, world);
 	}
 

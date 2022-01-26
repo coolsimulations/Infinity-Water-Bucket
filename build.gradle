@@ -3,6 +3,13 @@ plugins {
     id 'maven-publish'
 }
 
+repositories {
+    maven {
+        name = 'legacy-fabric'
+        url = 'https://maven.legacyfabric.net'
+    }
+}
+
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -12,6 +19,12 @@ group = project.maven_group
 
 sourceSets.main.java.srcDirs += 'java'
 sourceSets.main.resources.srcDirs += 'resources'
+
+minecraft {
+    intermediaryUrl = {
+        return "https://maven.legacyfabric.net/net/fabricmc/intermediary/" + it + "/intermediary-" + it + "-v2.jar";
+    }
+}
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
