@@ -5,15 +5,15 @@ import java.util.Map;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.DispenserBehavior;
+import net.minecraft.item.Item;
 
 @Mixin(DispenserBlock.class)
 public interface DispenserBlockMixin {
 
-	@Accessor("DISPENSER_REGISTRY")
-	public static Map<Item, DispenseItemBehavior> getRegistry() {
+	@Accessor("BEHAVIORS")
+	public static Map<Item, DispenserBehavior> getRegistry() {
 		throw new AssertionError();
 	}
 }

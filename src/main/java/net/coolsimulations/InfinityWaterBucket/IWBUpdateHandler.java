@@ -3,23 +3,25 @@ package net.coolsimulations.InfinityWaterBucket;
 import java.net.URL;
 import java.util.Scanner;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.SharedConstants;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.HoverEvent;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 
 public class IWBUpdateHandler {
 	
 	private static String latestVersion;
 	private static String latestVersionInfo;
 	public static boolean isOld = false;
-	public static TranslatableComponent updateInfo = null;
-	public static TextComponent updateVersionInfo = null;
+	public static TranslatableText updateInfo = null;
+	public static LiteralText updateVersionInfo = null;
 	
 	public static void init() {
 		
 		try {
-            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker116.txt");
+            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker115.txt");
             Scanner s = new Scanner(url.openStream());
             latestVersion = s.next();
             s.close();
@@ -28,7 +30,7 @@ public class IWBUpdateHandler {
         }
 		
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo116.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo115.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersionInfo = s.nextLine();
 			s.close();
@@ -42,14 +44,17 @@ public class IWBUpdateHandler {
 				
 				isOld = true;
 				
-				TextComponent iwb = new TextComponent(IWBReference.MOD_NAME);
-				iwb.withStyle(ChatFormatting.BLUE);
+				LiteralText iwb = new LiteralText(IWBReference.MOD_NAME);
+				iwb.getStyle().setColor(Formatting.BLUE);
 				
-				TextComponent MCVersion = new TextComponent(SharedConstants.getCurrentVersion().getName());
-				MCVersion.withStyle(ChatFormatting.BLUE);
+				LiteralText MCVersion = new LiteralText(SharedConstants.getGameVersion().getName());
+				MCVersion.getStyle().setColor(Formatting.BLUE);
 				
-				updateInfo = new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});
-				updateInfo.withStyle(ChatFormatting.YELLOW);
+				updateInfo = new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});
+				updateInfo.getStyle().setColor(Formatting.YELLOW);
+				
+				updateInfo.getStyle().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display2"))));
+				updateInfo.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket"));
 				
 			}
 			
@@ -57,20 +62,26 @@ public class IWBUpdateHandler {
 				
 				isOld = true;
 				
-				TextComponent iwb = new TextComponent(IWBReference.MOD_NAME);
-				iwb.withStyle(ChatFormatting.BLUE);
+				LiteralText iwb = new LiteralText(IWBReference.MOD_NAME);
+				iwb.getStyle().setColor(Formatting.BLUE);
 				
-				TextComponent version = new TextComponent(latestVersion);
-				version.withStyle(ChatFormatting.BLUE);
+				LiteralText version = new LiteralText(latestVersion);
+				version.getStyle().setColor(Formatting.BLUE);
 				
-				updateInfo = new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display1"), new Object[] {iwb, version});
-				updateInfo.withStyle(ChatFormatting.YELLOW);
+				updateInfo = new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display1"), new Object[] {iwb, version});
+				updateInfo.getStyle().setColor(Formatting.YELLOW);
+
+				updateInfo.getStyle().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display2"))));
+				updateInfo.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket"));
 				
 				if(latestVersionInfo != null) {
 
-					updateVersionInfo = new TextComponent(latestVersionInfo);
-					updateVersionInfo.withStyle(ChatFormatting.DARK_AQUA);
-					updateVersionInfo.withStyle(ChatFormatting.BOLD);
+					updateVersionInfo = new LiteralText(latestVersionInfo);
+					updateVersionInfo.getStyle().setColor(Formatting.DARK_AQUA);
+					updateVersionInfo.getStyle().setBold(true);
+					
+					updateVersionInfo.getStyle().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display2"))));
+					updateVersionInfo.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket"));
 				}
 				
 			}

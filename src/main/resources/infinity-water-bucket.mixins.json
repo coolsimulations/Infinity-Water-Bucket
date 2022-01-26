@@ -7,11 +7,11 @@
     "CauldronBlockMixin",
     "DispenserBlockMixin",
     "EnchantmentMixin",
-    "ArrowInfiniteEnchantmentMixin",
-    "AbstractFishMixin",
-    "ItemUtilsMixin",
+    "InfinityEnchantmentMixin",
+    "FishEntityMixin",
+    "CowEntityMixin",
     "AbstractFurnaceBlockEntityMixin",
-    "PlayerListMixin"
+    "PlayerManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

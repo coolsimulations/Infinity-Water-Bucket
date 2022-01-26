@@ -5,19 +5,27 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BucketItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
 @Mixin(BucketItem.class)
 public abstract class BucketItemMixin {
 
-    @Inject(at = @At("HEAD"), method = "getEmptySuccessItem", cancellable = true)
-    private void iwb$getEmptySuccessItem(ItemStack stack, Player player, CallbackInfoReturnable<ItemStack> info) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0 && stack.getItem() == Items.WATER_BUCKET) {
+    @Inject(at = @At("HEAD"), method = "getEmptiedStack", cancellable = true)
+    private void iwb$getEmptiedStack(ItemStack stack, PlayerEntity player, CallbackInfoReturnable<ItemStack> info) {
+        if (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.WATER_BUCKET) {
+            info.setReturnValue(stack);
+        }
+    }
+    
+    @Inject(at = @At("HEAD"), method = "getFilledStack", cancellable = true)
+    private void iwb$getFilledStack(ItemStack stack, PlayerEntity player, Item filledBucket, CallbackInfoReturnable<ItemStack> info) {
+        if (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.BUCKET) {
             info.setReturnValue(stack);
         }
     }
