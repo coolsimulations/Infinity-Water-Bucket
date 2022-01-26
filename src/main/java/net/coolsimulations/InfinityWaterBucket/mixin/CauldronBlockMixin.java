@@ -28,7 +28,7 @@ public abstract class CauldronBlockMixin {
 	@Shadow
 	public abstract void setLevel(World world, BlockPos pos, BlockState state, int level);
 
-	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "onUse", cancellable = true)
+	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "activate", cancellable = true)
 	public void iwb$stopCauldronFromUsingInfinityWaterBucket(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> info) {
 		ItemStack stack = player.getStackInHand(hand);
 
