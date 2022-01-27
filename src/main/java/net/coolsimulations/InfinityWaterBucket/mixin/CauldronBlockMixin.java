@@ -6,17 +6,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import net.minecraft.class_2704;
+import net.minecraft.class_2927;
+import net.minecraft.class_2961;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CauldronBlock;
 import net.minecraft.client.sound.SoundCategory;
-import net.minecraft.client.sound.SoundEvents;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -28,20 +28,20 @@ public abstract class CauldronBlockMixin {
 	public abstract void setLevel(World world, BlockPos pos, BlockState state, int level);
 
 	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "method_421", cancellable = true)
-	public void iwb$stopCauldronFromUsingInfinityWaterBucket(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, Direction direction, float f, float g, float h, CallbackInfoReturnable<Boolean> info) {
-		ItemStack stack = player.getStackInHand(hand);
+	public void iwb$stopCauldronFromUsingInfinityWaterBucket(World world, BlockPos pos, BlockState state, PlayerEntity player, class_2961 hand, Direction direction, float f, float g, float h, CallbackInfoReturnable<Boolean> info) {
+		ItemStack stack = player.method_13047(hand);
 
-		if(EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && !stack.isEmpty() && !world.isClient) {
+		if(EnchantmentHelper.method_11452(class_2704.field_12420, stack) > 0 && !stack.isEmpty() && !world.isClient) {
 			if (stack.getItem() == Items.BUCKET) {
-				player.method_15928(Stats.USE_CAULDRON);
+				player.incrementStat(Stats.CAULDRONS_USED);
 				this.setLevel(world, pos, state, 0);
-				world.method_11486(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				world.method_11486(null, pos, class_2927.field_13921, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				info.setReturnValue(true);
 			}
 			if (stack.getItem() == Items.WATER_BUCKET) {
-				player.method_15928(Stats.FILL_CAULDRON);
+				player.incrementStat(Stats.CAULDRONS_FILLED);
 				this.setLevel(world, pos, state, 3);
-				world.method_11486(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				world.method_11486(null, pos, class_2927.field_13919, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				info.setReturnValue(true);
 			}
 		}

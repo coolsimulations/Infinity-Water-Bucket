@@ -19,7 +19,7 @@ public class PlayerManagerMixin {
 
 		if(IWBUpdateHandler.isOld == true) {
 			if(player.server.isDedicated()) {
-				if(player.method_15592(player.server.getOpPermissionLevel())) {
+				if(player.server.getPlayerManager().isOperator(player.getGameProfile())) {
 					messageOutdated(player);
 				}
 			} else {
@@ -30,7 +30,7 @@ public class PlayerManagerMixin {
 	
 	@Unique
 	private static void messageOutdated(ServerPlayerEntity player) {
-		player.method_5505(IWBUpdateHandler.updateInfo);
-		player.method_5505(IWBUpdateHandler.updateVersionInfo);
+		player.sendMessage(IWBUpdateHandler.updateInfo);
+		player.sendMessage(IWBUpdateHandler.updateVersionInfo);
 	}
 }

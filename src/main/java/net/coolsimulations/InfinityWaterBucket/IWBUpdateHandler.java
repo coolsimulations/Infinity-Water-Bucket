@@ -20,7 +20,7 @@ public class IWBUpdateHandler {
 	public static void init() {
 		
 		try {
-            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker113.txt");
+            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker112.txt");
             Scanner s = new Scanner(url.openStream());
             latestVersion = s.next();
             s.close();
@@ -29,7 +29,7 @@ public class IWBUpdateHandler {
         }
 		
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo113.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo112.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersionInfo = s.nextLine();
 			s.close();

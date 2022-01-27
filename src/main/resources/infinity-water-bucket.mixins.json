@@ -7,7 +7,6 @@
     "CauldronBlockMixin",
     "EnchantmentMixin",
     "InfinityEnchantmentMixin",
-    "FishEntityMixin",
     "CowEntityMixin",
     "FurnaceBlockEntityMixin",
     "PlayerManagerMixin"

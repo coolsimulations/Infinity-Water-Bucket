@@ -1,0 +1,5 @@
+iwb.update.display1=This is an old version of %s! Version %s is now available!
+iwb.update.display2=Please click to download!
+iwb.update.display3=%s no longer supports Minecraft Version %s! Please update to a newer Minecraft Version for more features!
+
+modmenu.guilded=Guilded
