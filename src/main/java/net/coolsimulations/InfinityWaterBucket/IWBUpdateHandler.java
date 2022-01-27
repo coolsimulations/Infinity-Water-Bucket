@@ -46,7 +46,7 @@ public class IWBUpdateHandler {
 				LiteralText iwb = new LiteralText(IWBReference.MOD_NAME);
 				iwb.getStyle().setFormatting(Formatting.BLUE);
 				
-				LiteralText MCVersion = new LiteralText("1.13.2");
+				LiteralText MCVersion = new LiteralText("1.12.2");
 				MCVersion.getStyle().setFormatting(Formatting.BLUE);
 				
 				updateInfo = new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});
