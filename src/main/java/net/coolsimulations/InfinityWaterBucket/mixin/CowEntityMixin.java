@@ -1,5 +1,6 @@
 package net.coolsimulations.InfinityWaterBucket.mixin;
 
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,11 +23,11 @@ public abstract class CowEntityMixin extends AnimalEntity {
 		super(world);
 	}
 
-	@Inject(at = @At("HEAD"), method = "interactMob", cancellable = true)
-	private void iwb$interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<Boolean> info) {
+	@Inject(at = @At("HEAD"), method = "method_13079", cancellable = true)
+	private void iwb$interactMob(PlayerEntity player, Hand hand, @Nullable ItemStack itemStack, CallbackInfoReturnable<Boolean> info) {
 		ItemStack stack = player.getStackInHand(hand);
 		if(EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.BUCKET && !this.isBaby()) {
-			info.setReturnValue(super.interactMob(player, hand));
+			info.setReturnValue(super.method_13079(player, hand, itemStack));
 		}
 	}
 }

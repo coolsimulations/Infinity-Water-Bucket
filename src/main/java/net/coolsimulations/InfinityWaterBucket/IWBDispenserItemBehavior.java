@@ -69,8 +69,8 @@ public class IWBDispenserItemBehavior {
 				} else {
 					return super.dispenseSilently(pointer, itemStack);
 				}
-				itemStack.decrement(1);
-				if (itemStack.method_13654())
+				--itemStack.count;
+				if (itemStack.count == 0)
 					return new ItemStack(item); 
 				if (((DispenserBlockEntity)pointer.getBlockEntity()).method_514(new ItemStack(item)) < 0)
 					baseDispense.dispense(pointer, new ItemStack(item)); 

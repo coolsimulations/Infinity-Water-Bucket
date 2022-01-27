@@ -1,5 +1,6 @@
 package net.coolsimulations.InfinityWaterBucket.mixin;
 
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,8 +29,7 @@ public abstract class CauldronBlockMixin {
 	public abstract void setLevel(World world, BlockPos pos, BlockState state, int level);
 
 	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "method_421", cancellable = true)
-	public void iwb$stopCauldronFromUsingInfinityWaterBucket(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction direction, float f, float g, float h, CallbackInfoReturnable<Boolean> info) {
-		ItemStack stack = player.getStackInHand(hand);
+	public void iwb$stopCauldronFromUsingInfinityWaterBucket(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, @Nullable ItemStack stack, Direction direction, float f, float g, float h, CallbackInfoReturnable<Boolean> info) {
 
 		if(EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && !stack.isEmpty() && !world.isClient) {
 			if (stack.getItem() == Items.BUCKET) {

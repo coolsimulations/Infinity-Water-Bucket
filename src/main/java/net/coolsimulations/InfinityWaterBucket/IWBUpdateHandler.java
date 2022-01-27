@@ -20,7 +20,7 @@ public class IWBUpdateHandler {
 	public static void init() {
 		
 		try {
-            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker111.txt");
+            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker110.txt");
             Scanner s = new Scanner(url.openStream());
             latestVersion = s.next();
             s.close();
@@ -29,7 +29,7 @@ public class IWBUpdateHandler {
         }
 		
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo111.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo110.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersionInfo = s.nextLine();
 			s.close();
@@ -46,7 +46,7 @@ public class IWBUpdateHandler {
 				LiteralText iwb = new LiteralText(IWBReference.MOD_NAME);
 				iwb.getStyle().setFormatting(Formatting.BLUE);
 				
-				LiteralText MCVersion = new LiteralText("1.11.2");
+				LiteralText MCVersion = new LiteralText("1.10.2");
 				MCVersion.getStyle().setFormatting(Formatting.BLUE);
 				
 				updateInfo = new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});

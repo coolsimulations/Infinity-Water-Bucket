@@ -21,11 +21,10 @@ import net.minecraft.world.World;
 @Mixin(BucketItem.class)
 public abstract class BucketItemMixin {
 
-	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;incrementStat(Lnet/minecraft/stat/Stat;)V", shift = At.Shift.AFTER), method = "method_13649", slice = @Slice(
+	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;incrementStat(Lnet/minecraft/stat/Stat;)V", shift = At.Shift.AFTER), method = "method_11373", slice = @Slice(
 			from = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;method_8638(Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;)Z")
 			), cancellable = true)
-    private void iwb$getEmptiedStack(World world, PlayerEntity playerEntity, Hand hand, CallbackInfoReturnable<class_2963<ItemStack>> info) {
-		ItemStack stack = playerEntity.getStackInHand(hand);
+    private void iwb$getEmptiedStack(ItemStack stack, World world, PlayerEntity playerEntity, Hand hand, CallbackInfoReturnable<class_2963<ItemStack>> info) {
         if (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.WATER_BUCKET) {
             info.setReturnValue(new class_2963(ActionResult.SUCCESS, stack));
         }
