@@ -28,7 +28,7 @@ public class IWBDispenserItemBehavior {
 			public ItemStack dispenseSilently(BlockPointer pointer, ItemStack itemStack) {
 
 				BucketItem bucketItem = (BucketItem)itemStack.getItem();
-				BlockPos blockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+				BlockPos blockPos = pointer.getBlockPos().offset(DispenserBlock.getDirection(pointer.getBlockStateData()));
 				World world = pointer.getWorld();
 				if (bucketItem.method_11365(null, world, blockPos)) {
 					if (EnchantmentHelper.getLevel(Enchantments.INFINITY, itemStack) > 0 && itemStack.getItem() == Items.WATER_BUCKET) {
@@ -49,7 +49,7 @@ public class IWBDispenserItemBehavior {
 			public ItemStack dispenseSilently(BlockPointer pointer, ItemStack itemStack) {
 				Item item;
 				World iWorld = pointer.getWorld();
-				BlockPos blockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+				BlockPos blockPos = pointer.getBlockPos().offset(DispenserBlock.getDirection(pointer.getBlockStateData()));
 				BlockState blockState = iWorld.getBlockState(blockPos);
 				Block block = blockState.getBlock();
 				Material material = blockState.getMaterial();
