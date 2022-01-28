@@ -7,8 +7,8 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,8 +30,8 @@ public class IWBDispenserItemBehavior {
 				BucketItem bucketItem = (BucketItem)itemStack.getItem();
 				BlockPos blockPos = pointer.getBlockPos().offset(DispenserBlock.getDirection(pointer.getBlockStateData()));
 				World world = pointer.getWorld();
-				if (bucketItem.method_11365(null, world, blockPos)) {
-					if (EnchantmentHelper.getLevel(Enchantments.INFINITY, itemStack) > 0 && itemStack.getItem() == Items.WATER_BUCKET) {
+				if (bucketItem.empty(world, blockPos)) {
+					if (EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, itemStack) > 0 && itemStack.getItem() == Items.WATER_BUCKET) {
 						return itemStack;
 					} else {
 						return new ItemStack(Items.BUCKET);
@@ -52,11 +52,11 @@ public class IWBDispenserItemBehavior {
 				BlockPos blockPos = pointer.getBlockPos().offset(DispenserBlock.getDirection(pointer.getBlockStateData()));
 				BlockState blockState = iWorld.getBlockState(blockPos);
 				Block block = blockState.getBlock();
-				Material material = blockState.getMaterial();
+				Material material = block.getMaterial();
 
 				if (block instanceof AbstractFluidBlock && (blockState.get(AbstractFluidBlock.LEVEL)).intValue() == 0) {
 					iWorld.setAir(blockPos);
-					if (EnchantmentHelper.getLevel(Enchantments.INFINITY, itemStack) > 0 && itemStack.getItem() == Items.BUCKET) {
+					if (EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, itemStack) > 0 && itemStack.getItem() == Items.BUCKET) {
 						return itemStack;
 					}
 					if(material == Material.WATER) {

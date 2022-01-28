@@ -14,7 +14,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 @Mixin(PlayerManager.class)
 public class PlayerManagerMixin {
 
-	@Inject(at = @At("TAIL"), method = "method_12827", cancellable = true)
+	@Inject(at = @At("TAIL"), method = "onPlayerConnect", cancellable = true)
 	public void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo info) {
 
 		if(IWBUpdateHandler.isOld == true) {
