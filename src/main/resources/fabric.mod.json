@@ -32,7 +32,7 @@
   
   "depends": {
     "fabricloader": ">=0.7.4",
-    "minecraft": "1.8.x"
+    "minecraft": "1.7.x"
   },
   
   "custom": {

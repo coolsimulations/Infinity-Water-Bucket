@@ -24,7 +24,7 @@ public abstract class CowEntityMixin extends AnimalEntity {
 	@Inject(at = @At("HEAD"), method = "canBeLeashedBy", cancellable = true)
 	private void iwb$interactMob(PlayerEntity player, CallbackInfoReturnable<Boolean> info) {
 		ItemStack stack = player.inventory.getMainHandStack();
-		if(EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && stack.getItem() == Items.BUCKET && !this.isBaby()) {
+		if(EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && stack.getItem() == Items.BUCKET) {
 			info.setReturnValue(super.canBeLeashedBy(player));
 		}
 	}
