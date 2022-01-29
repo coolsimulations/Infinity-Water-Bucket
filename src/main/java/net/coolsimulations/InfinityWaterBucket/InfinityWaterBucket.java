@@ -8,7 +8,6 @@ public class InfinityWaterBucket implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		IWBUpdateHandler.init();
-		IWBDispenserItemBehavior.init();
 	}
 	
 	public static String langTranslations(String key) {
