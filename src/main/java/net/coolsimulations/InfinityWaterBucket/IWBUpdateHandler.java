@@ -3,8 +3,6 @@ package net.coolsimulations.InfinityWaterBucket;
 import java.net.URL;
 import java.util.Scanner;
 
-import net.minecraft.util.Formatting;
-
 public class IWBUpdateHandler {
 	
 	private static String latestVersion;
@@ -12,13 +10,13 @@ public class IWBUpdateHandler {
 	public static boolean isOld = false;
 	public static String updateInfo = null;
 	public static String updateVersionInfo = null;
-	public static String iwb = Formatting.BLUE + IWBReference.MOD_NAME + Formatting.YELLOW;
+	public static String iwb = "§9" + IWBReference.MOD_NAME + "§e";
 	public static String version = "";
 	
 	public static void init() {
 		
 		try {
-            URL url = new URL("http://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker15.txt");
+            URL url = new URL("http://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker14.txt");
             Scanner s = new Scanner(url.openStream());
             latestVersion = s.next();
             s.close();
@@ -27,7 +25,7 @@ public class IWBUpdateHandler {
         }
 		
 		try {
-			URL url = new URL("http://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo15.txt");
+			URL url = new URL("http://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo14.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersionInfo = s.nextLine();
 			s.close();
@@ -41,9 +39,9 @@ public class IWBUpdateHandler {
 				
 				isOld = true;
 				
-				version = Formatting.BLUE + "1.5.2" + Formatting.YELLOW;
+				version = "§9" + "1.4.7" + "§e";
 				
-				updateInfo = Formatting.YELLOW + InfinityWaterBucket.langTranslations("iwb.update.display3") + Formatting.RESET;
+				updateInfo = "§e" + InfinityWaterBucket.langTranslations("iwb.update.display3") + "§r";
 				
 			}
 			
@@ -51,13 +49,13 @@ public class IWBUpdateHandler {
 				
 				isOld = true;
 				
-				version = Formatting.BLUE + latestVersion + Formatting.YELLOW;
+				version = "§9" + latestVersion + "§e";
 				
-				updateInfo = Formatting.YELLOW + InfinityWaterBucket.langTranslations("iwb.update.display1") + Formatting.RESET;
+				updateInfo = "§e" + InfinityWaterBucket.langTranslations("iwb.update.display1") + "§r";
 				
 				if(latestVersionInfo != null) {
 
-					updateVersionInfo = Formatting.DARK_AQUA + "" + Formatting.BOLD + latestVersionInfo + Formatting.RESET;
+					updateVersionInfo = "§3" + "§l" + latestVersionInfo + "§r";
 				}
 				
 			}

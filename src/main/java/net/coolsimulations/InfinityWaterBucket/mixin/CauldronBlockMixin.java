@@ -28,8 +28,7 @@ public abstract class CauldronBlockMixin extends Block {
 
 		if(EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && !stack.isEmpty() && !world.isClient) {
 			if (stack.getItem() == Item.WATER_BUCKET) {
-				world.method_4718(i, j, k, 3, 2);
-				world.method_4725(i, j, k, this.id);
+				world.method_3672(i, j, k, 3);
 				info.setReturnValue(true);
 			}
 		}

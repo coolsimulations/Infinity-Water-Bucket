@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.enchantment.Enchantment;
@@ -26,15 +25,15 @@ public abstract class DispenseItemBehavior17Mixin extends ItemDispenserBehavior 
 	@Inject(at = @At("HEAD"), method = "dispenseSilently", cancellable = true)
 	private void iwb$modifyWaterBucketBehavior(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> info) {
 		World iWorld = pointer.getWorld();
-		Direction direction = DispenserBlock.getDirection(pointer.getBlockStateData());
+		Direction direction = Direction.getById(pointer.getBlockStateData());
 		int i = pointer.getBlockX() + direction.getOffsetX();
-		int j = pointer.getBlockY() + direction.getOffsetY();
+		int j = pointer.getBlockY();
 		int k = pointer.getBlockZ() + direction.getOffsetZ();
 		Material material = iWorld.getMaterial(i, j, k);
 		int m = iWorld.getBlockData(i, j, k);
 		if (EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && stack.getItem() == Item.BUCKET) {
 			if ((Material.WATER.equals(material) || Material.LAVA.equals(material)) && m == 0) {
-				iWorld.method_4722(i, j, k);
+				iWorld.method_3690(i, j, k, 0);
 				info.setReturnValue(stack);
 			}
 		}

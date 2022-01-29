@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -28,9 +27,9 @@ public abstract class DispenseItemBehavior16Mixin extends ItemDispenserBehavior 
 		int i = pointer.getBlockX();
 		int j = pointer.getBlockY();
 		int k = pointer.getBlockZ();
-		Direction direction = DispenserBlock.getDirection(pointer.getBlockStateData());
+		Direction direction = Direction.getById(pointer.getBlockStateData());
 		if (EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && stack.getItem() == Item.WATER_BUCKET) {
-			if (bucketItem.method_3312(pointer.getWorld(), i, j, k, i + direction.getOffsetX(), j + direction.getOffsetY(), k + direction.getOffsetZ())) {
+			if (bucketItem.method_3312(pointer.getWorld(), i, j, k, i + direction.getOffsetX(), j, k + direction.getOffsetZ())) {
 				info.setReturnValue(stack);
 			}
 		}
