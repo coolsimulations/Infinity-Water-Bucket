@@ -10,8 +10,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.world.World;
 
 @Mixin(CowEntity.class)
@@ -24,7 +24,7 @@ public abstract class CowEntityMixin extends AnimalEntity {
 	@Inject(at = @At("HEAD"), method = "canBeLeashedBy", cancellable = true)
 	private void iwb$interactMob(PlayerEntity player, CallbackInfoReturnable<Boolean> info) {
 		ItemStack stack = player.inventory.getMainHandStack();
-		if(EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && stack.getItem() == Items.BUCKET) {
+		if(EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && stack.getItem() == Item.BUCKET) {
 			info.setReturnValue(super.canBeLeashedBy(player));
 		}
 	}

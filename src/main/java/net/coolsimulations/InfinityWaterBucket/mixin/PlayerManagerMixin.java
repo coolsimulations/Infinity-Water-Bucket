@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.coolsimulations.InfinityWaterBucket.IWBUpdateHandler;
-import net.minecraft.network.ClientConnection;
+import net.minecraft.network.Connection;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -15,11 +15,11 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class PlayerManagerMixin {
 
 	@Inject(at = @At("TAIL"), method = "onPlayerConnect", cancellable = true)
-	public void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo info) {
+	public void onPlayerConnect(Connection connection, ServerPlayerEntity player, CallbackInfo info) {
 
 		if(IWBUpdateHandler.isOld == true) {
 			if(player.server.isDedicated()) {
-				if(player.server.getPlayerManager().isOperator(player.getGameProfile())) {
+				if(player.server.getPlayerManager().method_2007(player.method_3334())) {
 					messageOutdated(player);
 				}
 			} else {
@@ -30,7 +30,7 @@ public class PlayerManagerMixin {
 	
 	@Unique
 	private static void messageOutdated(ServerPlayerEntity player) {
-		player.sendMessage(IWBUpdateHandler.updateInfo);
-		player.sendMessage(IWBUpdateHandler.updateVersionInfo);
+		player.method_5505(IWBUpdateHandler.updateInfo);
+		player.method_5505(IWBUpdateHandler.updateVersionInfo);
 	}
 }

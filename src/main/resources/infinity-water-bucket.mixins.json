@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BucketItemMixin",
+    "DispenseItemBehavior16Mixin", "DispenseItemBehavior17Mixin",
     "CauldronBlockMixin",
     "EnchantmentMixin",
     "InfinityEnchantmentMixin",

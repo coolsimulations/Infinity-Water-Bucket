@@ -7,15 +7,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.InfinityEnchantment;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 @Mixin(InfinityEnchantment.class)
 public class InfinityEnchantmentMixin extends EnchantmentMixin {
 
 	@Override
 	protected void iwb$infinityStub(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
-		if (stack.getItem() == Items.WATER_BUCKET || stack.getItem() == Items.BUCKET) {
+		if (stack.getItem() == Item.WATER_BUCKET || stack.getItem() == Item.BUCKET) {
 			info.setReturnValue(true);
 		}
 	}

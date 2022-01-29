@@ -26,12 +26,31 @@ minecraft {
     }
 }
 
+def lwjglVersion = System.getProperty("os.name").toLowerCase().contains("mac") ? "2.9.1" : "2.9.0"
+
 dependencies {
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
+
+    implementation "org.lwjgl.lwjgl:lwjgl_util:${lwjglVersion}"
+    implementation "org.lwjgl.lwjgl:lwjgl:${lwjglVersion}"
+    implementation "org.lwjgl.lwjgl:lwjgl-platform:${lwjglVersion}"
+
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     implementation fileTree(dir: 'libs', include: '*.jar')
 
+}
+
+configurations.all {
+	resolutionStrategy {
+		dependencySubstitution {
+			substitute module('org.lwjgl.lwjgl:lwjgl_util:2.9.1-nightly-20130708-debug3') with module("org.lwjgl.lwjgl:lwjgl_util:${lwjglVersion}")
+			substitute module('org.lwjgl.lwjgl:lwjgl:2.9.1-nightly-20130708-debug3') with module("org.lwjgl.lwjgl:lwjgl:${lwjglVersion}")
+		}
+		force "org.lwjgl.lwjgl:lwjgl-platform:${lwjglVersion}"
+	}
 }
 
 processResources {
