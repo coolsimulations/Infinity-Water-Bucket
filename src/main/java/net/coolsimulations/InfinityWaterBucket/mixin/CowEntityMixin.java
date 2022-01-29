@@ -21,11 +21,11 @@ public abstract class CowEntityMixin extends AnimalEntity {
 		super(world);
 	}
 
-	@Inject(at = @At("HEAD"), method = "canBeLeashedBy", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "method_2537", cancellable = true)
 	private void iwb$interactMob(PlayerEntity player, CallbackInfoReturnable<Boolean> info) {
 		ItemStack stack = player.inventory.getMainHandStack();
 		if(EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && stack.getItem() == Item.BUCKET) {
-			info.setReturnValue(super.canBeLeashedBy(player));
+			info.setReturnValue(super.method_2537(player));
 		}
 	}
 }

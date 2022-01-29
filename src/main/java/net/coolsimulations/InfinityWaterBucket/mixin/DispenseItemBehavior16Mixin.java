@@ -30,7 +30,7 @@ public abstract class DispenseItemBehavior16Mixin extends ItemDispenserBehavior 
 		int k = pointer.getBlockZ();
 		Direction direction = DispenserBlock.getDirection(pointer.getBlockStateData());
 		if (EnchantmentHelper.method_3519(Enchantment.INIFINITY.id, stack) > 0 && stack.getItem() == Item.WATER_BUCKET) {
-			if (bucketItem.method_6320(pointer.getWorld(), i + direction.getOffsetX(), j + direction.getOffsetY(), k + direction.getOffsetZ())) {
+			if (bucketItem.method_3312(pointer.getWorld(), i, j, k, i + direction.getOffsetX(), j + direction.getOffsetY(), k + direction.getOffsetZ())) {
 				info.setReturnValue(stack);
 			}
 		}
