@@ -50,7 +50,7 @@ public class IWBUpdateHandler {
 				LiteralText MCVersion = new LiteralText(SharedConstants.getGameVersion().getName());
 				MCVersion.getStyle().setColor(Formatting.BLUE);
 				
-				updateInfo = new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});
+				updateInfo = new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb, MCVersion});
 				updateInfo.getStyle().setColor(Formatting.YELLOW);
 				
 				updateInfo.getStyle().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display2"))));
