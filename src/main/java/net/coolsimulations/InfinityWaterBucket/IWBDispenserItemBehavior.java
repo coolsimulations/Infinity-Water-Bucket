@@ -36,7 +36,7 @@ public class IWBDispenserItemBehavior {
 						bucketItem.checkExtraContent(level, itemStack, blockPos);
 						return itemStack;
 					} else {
-						return itemStack;
+						return new DefaultDispenseItemBehavior().dispense(blockSource, itemStack);
 					}
 				} else {
 					return water_bucket.dispense(blockSource, itemStack);
