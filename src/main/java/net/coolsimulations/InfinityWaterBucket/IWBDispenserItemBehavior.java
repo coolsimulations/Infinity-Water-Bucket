@@ -37,7 +37,7 @@ public class IWBDispenserItemBehavior {
 						bucketItem.onEmptied(world, itemStack, blockPos);
 						return itemStack;
 					} else {
-						return itemStack;
+						return new ItemDispenserBehavior().dispense(pointer, itemStack);
 					}
 				} else {
 					return water_bucket.dispense(pointer, itemStack);
