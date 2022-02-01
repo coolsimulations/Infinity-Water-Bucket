@@ -19,7 +19,7 @@ public class IWBUpdateHandler {
 	public static void init() {
 		
 		try {
-            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker118.txt");
+            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket/versionchecker118.txt");
             Scanner s = new Scanner(url.openStream());
             latestVersion = s.next();
             s.close();
@@ -28,7 +28,7 @@ public class IWBUpdateHandler {
         }
 		
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/updateinfo118.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket/updateinfo118.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersionInfo = s.nextLine();
 			s.close();
@@ -48,7 +48,7 @@ public class IWBUpdateHandler {
 				TextComponent MCVersion = new TextComponent(SharedConstants.getCurrentVersion().getName());
 				MCVersion.withStyle(ChatFormatting.BLUE);
 				
-				updateInfo = new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});
+				updateInfo = new TranslatableComponent("iwb.update.display3", new Object[] {iwb, MCVersion});
 				updateInfo.withStyle(ChatFormatting.YELLOW);
 				
 			}
@@ -63,7 +63,7 @@ public class IWBUpdateHandler {
 				TextComponent version = new TextComponent(latestVersion);
 				version.withStyle(ChatFormatting.BLUE);
 				
-				updateInfo = new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display1"), new Object[] {iwb, version});
+				updateInfo = new TranslatableComponent("iwb.update.display1", new Object[] {iwb, version});
 				updateInfo.withStyle(ChatFormatting.YELLOW);
 				
 				if(latestVersionInfo != null) {

@@ -6,6 +6,6 @@
 
 **Note:** For developers, Infinity Water Bucket has a Dev release, which is available on the [CurseForge](https://www.curseforge.com/minecraft/mc-mods/infinity-water-bucket) page.
 To see more of [CoolSimulations](https://github.com/coolsimulations) projects, check out the following:
- * [ServerStop](https://curseforge.com/minecraft/mc-mods/serverstop-fabric)
- * [EffectsLeft](https://curseforge.com/minecraft/mc-mods/effectsleft-fabric)
+ * [ServerStop](https://curseforge.com/minecraft/mc-mods/serverstop)
+ * [EffectsLeft](https://curseforge.com/minecraft/mc-mods/effectsleft)
  * [FloatingItems](https://curseforge.com/minecraft/mc-mods/floatingitems)

@@ -1,49 +1,113 @@
-plugins {
-    id 'fabric-loom' version '0.10-SNAPSHOT'
-    id 'maven-publish'
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
+    }
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'eclipse'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
-sourceSets.main.java.srcDirs += 'java'
-sourceSets.main.resources.srcDirs += 'resources'
+minecraft {
+    mappings channel: 'official', version: '1.18.1'
+    accessTransformer = file 'src/main/resources/META-INF/accesstransformer.cfg'
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            mods {
+                infinitywaterbucket {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            mods {
+                infinitywaterbucket {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            args '--mod', 'infinitywaterbucket', '--all', '--output', file('src/generated/resources/')
+
+            mods {
+                survivalplus {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+repositories {
+    maven { url "https://maven.shedaniel.me" }
+    maven { url "https://maven.architectury.dev/" }
+    maven { url "https://dvs1.progwml6.com/files/maven/" }
+}
+
+mixin {
+    add sourceSets.main, "infinity-water-bucket.refmap.json"
+
+    config "infinity-water-bucket.mixins.json"
+
+    debug.export = true
+}
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings minecraft.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    processResources.setDuplicatesStrategy(DuplicatesStrategy.WARN)
     implementation fileTree(dir: 'libs', include: '*.jar')
 
 }
 
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
+repositories {
+    maven {
+        url = "https://github.com/ricksouth/serilum-forge-maven/raw/maven/"
     }
 }
 
-tasks.withType(JavaCompile) {
-    it.options.encoding = "UTF-8"
-    it.options.release = 17
-}
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft_version
 
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        include 'META-INF/mods.toml'
+        include 'infinity-water-bucket.mixins.json'
+                
+        expand 'version':project.version, 'mcversion':project.minecraft_version
+    }
+        
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+        exclude 'META-INF/mods.toml'
     }
 }
 
 task packDev(type: Jar) {
     from sourceSets.main.output
     from sourceSets.main.allJava
-    classifier = "Dev"
+    baseName = "Infinity-Water-Bucket-Dev"
     version = "${project.version}"
 
     println(defaultTasks)

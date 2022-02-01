@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[39,]"
+issueTrackerURL="http://github.com/coolsimulations/infinity-water-bucket/issues/"
+logoFile="logo.png"
+license="All rights reserved"
+
+[[mods]]
+    modId="infinitywaterbucket"
+    version="${version}"
+    updateJSONURL="https://coolsimulations.net/mcmods/infinity-water-bucket-fabric/versionchecker.json"
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/infinity-water-bucket-fabric"
+    displayName="Infinity Water Bucket"
+    credits="Thanks to alkyaLy for establishing the foundations of this mod!"
+    authors="coolsim, alkyaLy"
+    description='''
+    Allows the enchantment Infinity for Water Buckets, providing an infinite portable water source
+    '''
+[[dependencies.infinitywaterbucket]]
+    modId="forge"
+    mandatory=true
+    versionRange="[39.0.18,]"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.infinitywaterbucket]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.1,]"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.infinitywaterbucket]]
+    modId="milkallthemobs"
+    mandatory=false
+    versionRange="[1.7,]"
+    ordering="NONE"
+    side="BOTH"
+    
