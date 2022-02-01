@@ -108,7 +108,7 @@ task packDev(type: Jar) {
     from sourceSets.main.output
     from sourceSets.main.allJava
     baseName = "Infinity-Water-Bucket-Dev"
-    version = "${project.version}"
+    version = "${project.minecraft_version}-${project.version}"
 
     println(defaultTasks)
 }
