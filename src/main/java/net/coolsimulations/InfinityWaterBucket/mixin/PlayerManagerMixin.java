@@ -31,6 +31,7 @@ public class PlayerManagerMixin {
 	@Unique
 	private static void messageOutdated(ServerPlayerEntity player) {
 		player.method_5505(IWBUpdateHandler.updateInfo);
-		player.method_5505(IWBUpdateHandler.updateVersionInfo);
+		if(IWBUpdateHandler.updateVersionInfo != null)
+			player.method_5505(IWBUpdateHandler.updateVersionInfo);
 	}
 }

@@ -45,7 +45,7 @@ public class IWBUpdateHandler {
 				
 				class_1687 MCVersion = class_1687.method_6028(Formatting.BLUE + "1.6.4" + Formatting.YELLOW);
 				
-				updateInfo = class_1687.method_6020(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});
+				updateInfo = class_1687.method_6020(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb, MCVersion});
 				updateInfo.method_6009(Formatting.YELLOW);
 				
 			}
