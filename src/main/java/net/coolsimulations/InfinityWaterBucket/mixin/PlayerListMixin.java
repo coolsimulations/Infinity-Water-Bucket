@@ -37,6 +37,7 @@ public class PlayerListMixin {
 	@Unique
 	private static void messageOutdated(ServerPlayer player) {
 		player.sendMessage(IWBUpdateHandler.updateInfo.withStyle((style) -> {return style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display2")))).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket"));}), ChatType.SYSTEM, Util.NIL_UUID);
-		player.sendMessage(IWBUpdateHandler.updateVersionInfo.withStyle((style) -> {return style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display2")))).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket"));}), ChatType.SYSTEM, Util.NIL_UUID);
+		if(IWBUpdateHandler.updateVersionInfo != null)
+			player.sendMessage(IWBUpdateHandler.updateVersionInfo.withStyle((style) -> {return style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display2")))).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket"));}), ChatType.SYSTEM, Util.NIL_UUID);
 	}
 }

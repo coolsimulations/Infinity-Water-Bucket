@@ -48,7 +48,7 @@ public class IWBUpdateHandler {
 				TextComponent MCVersion = new TextComponent(SharedConstants.getCurrentVersion().getName());
 				MCVersion.withStyle(ChatFormatting.BLUE);
 				
-				updateInfo = new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});
+				updateInfo = new TranslatableComponent(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb, MCVersion});
 				updateInfo.withStyle(ChatFormatting.YELLOW);
 				
 			}
