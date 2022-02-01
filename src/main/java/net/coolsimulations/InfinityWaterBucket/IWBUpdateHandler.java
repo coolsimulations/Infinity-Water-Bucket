@@ -51,7 +51,7 @@ public class IWBUpdateHandler {
 				LiteralText MCVersion = new LiteralText("1.7.10");
 				MCVersion.getStyle().setFormatting(Formatting.BLUE);
 				
-				updateInfo = new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb});
+				updateInfo = new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display3"), new Object[] {iwb, MCVersion});
 				updateInfo.getStyle().setFormatting(Formatting.YELLOW);
 				
 				updateInfo.getStyle().setHoverEvent(new HoverEvent(class_1985.field_8488, new TranslatableText(InfinityWaterBucket.langTranslations("iwb.update.display2"))));
