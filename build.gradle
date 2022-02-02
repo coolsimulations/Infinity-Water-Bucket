@@ -14,14 +14,14 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
 minecraft {
-    mappings channel: 'official', version: '1.18.1'
+    mappings channel: 'official', version: '1.17.1'
     accessTransformer = file 'src/main/resources/META-INF/accesstransformer.cfg'
     runs {
         client {
@@ -108,7 +108,7 @@ task packDev(type: Jar) {
     from sourceSets.main.output
     from sourceSets.main.allJava
     baseName = "Infinity-Water-Bucket-Dev"
-    version = "${project.version}"
+    version = "${project.minecraft_version}-${project.version}"
 
     println(defaultTasks)
 }
