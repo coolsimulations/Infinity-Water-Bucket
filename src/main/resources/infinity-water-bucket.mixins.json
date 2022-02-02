@@ -10,7 +10,8 @@
     "BucketableMixin", "AbstractFishMixin", "AxolotlMixin",
     "ItemUtilsMixin",
     "AbstractFurnaceBlockEntityMixin",
-    "PlayerListMixin"
+    "PlayerListMixin",
+    "MilkEventMixin"
   ],
   "injectors": {
     "defaultRequire": 1
