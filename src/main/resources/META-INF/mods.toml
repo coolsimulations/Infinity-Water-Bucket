@@ -34,12 +34,6 @@ license="All rights reserved"
     ordering="NONE"
     side="BOTH"
 [[dependencies.infinitywaterbucket]]
-    modId="squidmilk"
-    mandatory=false
-    versionRange="[2.0.0.0,]"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.infinitywaterbucket]]
     modId="getinthebucket"
     mandatory=false
     versionRange="[3.0.7,]"
