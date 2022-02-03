@@ -6,34 +6,37 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.tileentity.AbstractFurnaceTileEntity;
+import net.minecraft.util.NonNullList;
 
-@Mixin(AbstractFurnaceBlockEntity.class)
+@Mixin(AbstractFurnaceTileEntity.class)
 public abstract class AbstractFurnaceBlockEntityMixin {
+	
+	@Shadow
+	protected NonNullList<ItemStack> items;
 
 	@Shadow
-	public boolean canBurn(@Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i) {
+	public boolean canBurn(@Nullable IRecipe<?> recipe) {
 		throw new AssertionError();
 	}
 
-	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "burn", cancellable = true)
-	private void iwb$modifyWaterBucketBehavior(@Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i, CallbackInfoReturnable<Boolean> cir) {
-		if (recipe != null && canBurn(recipe, nonNullList, i)) {
-			ItemStack itemStack = (ItemStack) nonNullList.get(0);
-			if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, nonNullList.get(1)) > 0 && ((ItemStack) nonNullList.get(1)).is(Items.BUCKET)) {
-				if (itemStack.is(Blocks.WET_SPONGE.asItem()) && !((ItemStack) nonNullList.get(1)).isEmpty()) {
+	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "burn")
+	private void iwb$modifyWaterBucketBehavior(@Nullable IRecipe<?> recipe, CallbackInfo info) {
+		if (recipe != null && canBurn(recipe)) {
+			ItemStack itemStack = (ItemStack) items.get(0);
+			if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, items.get(1)) > 0 && ((ItemStack) items.get(1)).getItem() == Items.BUCKET) {
+				if (itemStack.getItem() == Blocks.WET_SPONGE.asItem() && !((ItemStack) items.get(1)).isEmpty()) {
 					ItemStack iwb = new ItemStack(Items.WATER_BUCKET);
 					iwb.enchant(Enchantments.INFINITY_ARROWS, 1);
-					nonNullList.set(1, iwb);
+					items.set(1, iwb);
 				}
 			}
 		}

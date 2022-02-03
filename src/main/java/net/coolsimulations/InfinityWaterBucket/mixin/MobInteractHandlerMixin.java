@@ -10,12 +10,12 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-@Mixin(targets = "com.natamus.milkallthemobs.events.MilkEvent", remap = false)
-public class MilkEventMixin {
+@Mixin(targets = "hardcorshik31.getinthebucket.util.MobInteractHandler", remap = false)
+public class MobInteractHandlerMixin {
 	
-	@Inject(at = @At("HEAD"), method = "onEntityInteract", cancellable = true, require = 0)
-	public void iwb$preventMilking(PlayerInteractEvent.EntityInteract event, CallbackInfo info) {
-		if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, event.getItemStack()) > 0 && event.getItemStack().getItem() == Items.BUCKET && !event.getWorld().isClientSide) {
+	@Inject(at = @At("HEAD"), method = "onInteract", cancellable = true, require = 0)
+	private static void iwb$preventMilking(PlayerInteractEvent.EntityInteractSpecific event, CallbackInfo info) {
+		if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, event.getItemStack()) > 0 && event.getItemStack().getItem() == Items.BUCKET) {
 			event.setCanceled(true);
 			info.cancel();
 		}

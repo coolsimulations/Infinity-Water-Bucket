@@ -5,12 +5,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.ArrowInfiniteEnchantment;
-import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.InfinityEnchantment;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
-@Mixin(ArrowInfiniteEnchantment.class)
+@Mixin(InfinityEnchantment.class)
 public class ArrowInfiniteEnchantmentMixin extends EnchantmentMixin {
 
 	@Override

@@ -1,16 +1,17 @@
 {
   "required": true,
   "package": "net.coolsimulations.InfinityWaterBucket.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_8",
   "refmap": "infinity-water-bucket.refmap.json",
   "mixins": [
     "BucketItemMixin",
+    "CauldronBlockMixin",
     "EnchantmentMixin",
     "ArrowInfiniteEnchantmentMixin",
-    "AbstractFishMixin", "AxolotlMixin",
+    "AbstractFishMixin",
     "ItemUtilsMixin",
     "AbstractFurnaceBlockEntityMixin",
-    "MilkEventMixin"
+    "MilkEventMixin", "MobInteractHandlerMixin", "AxolotlMixin", "ItemUsageMixin"
   ],
   "injectors": {
     "defaultRequire": 1

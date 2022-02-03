@@ -3,23 +3,24 @@ package net.coolsimulations.InfinityWaterBucket;
 import java.net.URL;
 import java.util.Scanner;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.SharedConstants;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.SharedConstants;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class IWBUpdateHandler {
 	
 	private static String latestVersion;
 	private static String latestVersionInfo;
 	public static boolean isOld = false;
-	public static TranslatableComponent updateInfo = null;
+	public static TranslationTextComponent updateInfo = null;
 	public static TextComponent updateVersionInfo = null;
 	
 	public static void init() {
 		
 		try {
-            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket/versionchecker117.txt");
+            URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket/versionchecker116.txt");
             Scanner s = new Scanner(url.openStream());
             latestVersion = s.next();
             s.close();
@@ -28,7 +29,7 @@ public class IWBUpdateHandler {
         }
 		
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket/updateinfo117.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/infinity-water-bucket/updateinfo116.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersionInfo = s.nextLine();
 			s.close();
@@ -42,14 +43,14 @@ public class IWBUpdateHandler {
 				
 				isOld = true;
 				
-				TextComponent iwb = new TextComponent(IWBReference.MOD_NAME);
-				iwb.withStyle(ChatFormatting.BLUE);
+				TextComponent iwb = new StringTextComponent(IWBReference.MOD_NAME);
+				iwb.withStyle(TextFormatting.BLUE);
 				
-				TextComponent MCVersion = new TextComponent(SharedConstants.getCurrentVersion().getName());
-				MCVersion.withStyle(ChatFormatting.BLUE);
+				TextComponent MCVersion = new StringTextComponent(SharedConstants.getCurrentVersion().getName());
+				MCVersion.withStyle(TextFormatting.BLUE);
 				
-				updateInfo = new TranslatableComponent("iwb.update.display3", new Object[] {iwb, MCVersion});
-				updateInfo.withStyle(ChatFormatting.YELLOW);
+				updateInfo = new TranslationTextComponent("iwb.update.display3", new Object[] {iwb, MCVersion});
+				updateInfo.withStyle(TextFormatting.YELLOW);
 				
 			}
 			
@@ -57,20 +58,20 @@ public class IWBUpdateHandler {
 				
 				isOld = true;
 				
-				TextComponent iwb = new TextComponent(IWBReference.MOD_NAME);
-				iwb.withStyle(ChatFormatting.BLUE);
+				TextComponent iwb = new StringTextComponent(IWBReference.MOD_NAME);
+				iwb.withStyle(TextFormatting.BLUE);
 				
-				TextComponent version = new TextComponent(latestVersion);
-				version.withStyle(ChatFormatting.BLUE);
+				TextComponent version = new StringTextComponent(latestVersion);
+				version.withStyle(TextFormatting.BLUE);
 				
-				updateInfo = new TranslatableComponent("iwb.update.display1", new Object[] {iwb, version});
-				updateInfo.withStyle(ChatFormatting.YELLOW);
+				updateInfo = new TranslationTextComponent("iwb.update.display1", new Object[] {iwb, version});
+				updateInfo.withStyle(TextFormatting.YELLOW);
 				
 				if(latestVersionInfo != null) {
 
-					updateVersionInfo = new TextComponent(latestVersionInfo);
-					updateVersionInfo.withStyle(ChatFormatting.DARK_AQUA);
-					updateVersionInfo.withStyle(ChatFormatting.BOLD);
+					updateVersionInfo = new StringTextComponent(latestVersionInfo);
+					updateVersionInfo.withStyle(TextFormatting.DARK_AQUA);
+					updateVersionInfo.withStyle(TextFormatting.BOLD);
 				}
 				
 			}

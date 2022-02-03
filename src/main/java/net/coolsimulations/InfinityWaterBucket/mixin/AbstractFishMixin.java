@@ -5,30 +5,30 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.AbstractFish;
-import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.WaterMobEntity;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.world.World;
 
-@Mixin(AbstractFish.class)
-public abstract class AbstractFishMixin extends WaterAnimal {
+@Mixin(AbstractFishEntity.class)
+public abstract class AbstractFishMixin extends WaterMobEntity {
 	
-	protected AbstractFishMixin(EntityType<? extends WaterAnimal> entityType, Level level) {
+	protected AbstractFishMixin(EntityType<? extends WaterMobEntity> entityType, World level) {
 		super(entityType, level);
 	}
 
 	@Inject(at = @At("HEAD"), method = "mobInteract", cancellable = true)
-	public void iwb$mobInteract(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> info) {
-		ItemStack stack = player.getItemInHand(interactionHand);
-		if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0 && stack.is(Items.WATER_BUCKET)) {
-            info.setReturnValue(super.mobInteract(player, interactionHand));
+	public void iwb$mobInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResultType> info) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0 && stack.getItem() == Items.WATER_BUCKET) {
+            info.setReturnValue(super.mobInteract(player, hand));
         }	
 	}
 }
