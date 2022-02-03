@@ -11,7 +11,8 @@
     "AbstractFishMixin",
     "ItemUtilsMixin",
     "AbstractFurnaceBlockEntityMixin",
-    "PlayerListMixin"
+    "PlayerListMixin",
+    "MilkEventMixin"
   ],
   "injectors": {
     "defaultRequire": 1
