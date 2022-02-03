@@ -15,7 +15,7 @@ public class MobInteractHandlerMixin {
 	
 	@Inject(at = @At("HEAD"), method = "onInteract", cancellable = true, require = 0)
 	private static void iwb$preventMilking(PlayerInteractEvent.EntityInteractSpecific event, CallbackInfo info) {
-		if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, event.getItemStack()) > 0 && event.getItemStack().getItem() == Items.BUCKET) {
+		if(EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, event.getItemStack()) > 0 && event.getItemStack().getItem() == Items.BUCKET) {
 			event.setCanceled(true);
 			info.cancel();
 		}

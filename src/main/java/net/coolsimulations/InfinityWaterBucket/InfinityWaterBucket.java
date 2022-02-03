@@ -1,11 +1,6 @@
 package net.coolsimulations.InfinityWaterBucket;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.ChatType;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.util.text.event.ClickEvent;
-import net.minecraft.util.text.event.HoverEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +19,7 @@ public class InfinityWaterBucket {
 	{
 		if(IWBUpdateHandler.isOld == true && event.getPlayer() instanceof ServerPlayerEntity) {
 			if(event.getPlayer().getServer().isDedicatedServer()) {
-				if(event.getPlayer().hasPermissions(event.getPlayer().getServer().getOperatorUserPermissionLevel())) {
+				if(event.getPlayer().hasPermissionLevel(event.getPlayer().getServer().getOpPermissionLevel())) {
 					messageOutdated((ServerPlayerEntity) event.getPlayer());
 				}
 			} else {
@@ -34,8 +29,8 @@ public class InfinityWaterBucket {
 	}
 
 	private static void messageOutdated(ServerPlayerEntity player) {
-		player.sendMessage(IWBUpdateHandler.updateInfo.withStyle((style) -> {return style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslationTextComponent("iwb.update.display2"))).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket"));}), ChatType.SYSTEM, Util.NIL_UUID);
+		player.sendMessage(IWBUpdateHandler.updateInfo);
 		if(IWBUpdateHandler.updateVersionInfo != null)
-			player.sendMessage(IWBUpdateHandler.updateVersionInfo.withStyle((style) -> {return style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslationTextComponent("iwb.update.display2"))).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/infinity-water-bucket"));}), ChatType.SYSTEM, Util.NIL_UUID);
+			player.sendMessage(IWBUpdateHandler.updateVersionInfo);
 	}
 }

@@ -9,9 +9,9 @@
     "EnchantmentMixin",
     "ArrowInfiniteEnchantmentMixin",
     "AbstractFishMixin",
-    "ItemUtilsMixin",
+    "CowEntityMixin",
     "AbstractFurnaceBlockEntityMixin",
-    "MilkEventMixin", "MobInteractHandlerMixin", "AxolotlMixin", "ItemUsageMixin"
+    "MilkEventMixin", "MobInteractHandlerMixin", "AbstractCauldronBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

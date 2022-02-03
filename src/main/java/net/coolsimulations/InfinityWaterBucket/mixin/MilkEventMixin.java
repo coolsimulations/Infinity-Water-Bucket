@@ -15,7 +15,7 @@ public class MilkEventMixin {
 	
 	@Inject(at = @At("HEAD"), method = "onEntityInteract", cancellable = true, require = 0)
 	public void iwb$preventMilking(PlayerInteractEvent.EntityInteract event, CallbackInfo info) {
-		if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, event.getItemStack()) > 0 && event.getItemStack().getItem() == Items.BUCKET && !event.getWorld().isClientSide) {
+		if(EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, event.getItemStack()) > 0 && event.getItemStack().getItem() == Items.BUCKET && !event.getWorld().isRemote) {
 			event.setCanceled(true);
 			info.cancel();
 		}

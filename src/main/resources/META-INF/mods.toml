@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[36,]"
+loaderVersion="[31,]"
 issueTrackerURL="http://github.com/coolsimulations/infinity-water-bucket/issues/"
 logoFile="logo.png"
 license="All rights reserved"
@@ -18,31 +18,31 @@ license="All rights reserved"
 [[dependencies.infinitywaterbucket]]
     modId="forge"
     mandatory=true
-    versionRange="[36.1.20,]"
+    versionRange="[31.2.45,]"
     ordering="NONE"
     side="BOTH"
 [[dependencies.infinitywaterbucket]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5,]"
+    versionRange="[1.15.2,]"
     ordering="NONE"
     side="BOTH"
 [[dependencies.infinitywaterbucket]]
     modId="milkallthemobs"
     mandatory=false
-    versionRange="[1.5,]"
+    versionRange="[1.4,]"
     ordering="NONE"
     side="BOTH"
 [[dependencies.infinitywaterbucket]]
     modId="getinthebucket"
     mandatory=false
-    versionRange="[3.0.7,]"
+    versionRange="[2.2.1,]"
     ordering="NONE"
     side="BOTH"
 [[dependencies.infinitywaterbucket]]
     modId="cavesandcliffs"
     mandatory=false
-    versionRange="[1.16.5-7.2.0,]"
+    versionRange="[1.15.2-5.0,]"
     ordering="NONE"
     side="BOTH"
     

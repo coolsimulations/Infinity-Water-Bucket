@@ -27,7 +27,7 @@ class EnchantmentMixin {
 	/**
 	 * Using Mixin inheritance so we can keep compatibility with mods that override this.
 	 */
-	@Inject(at = @At("HEAD"), method = "canEnchant", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "canApply", cancellable = true)
 	protected void iwb$infinityStub(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
 	}
 }

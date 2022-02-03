@@ -24,18 +24,18 @@ public abstract class AbstractFurnaceBlockEntityMixin {
 	protected NonNullList<ItemStack> items;
 
 	@Shadow
-	public boolean canBurn(@Nullable IRecipe<?> recipe) {
+	public boolean canSmelt(@Nullable IRecipe<?> recipe) {
 		throw new AssertionError();
 	}
 
-	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "burn")
+	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "smelt")
 	private void iwb$modifyWaterBucketBehavior(@Nullable IRecipe<?> recipe, CallbackInfo info) {
-		if (recipe != null && canBurn(recipe)) {
+		if (recipe != null && canSmelt(recipe)) {
 			ItemStack itemStack = (ItemStack) items.get(0);
-			if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, items.get(1)) > 0 && ((ItemStack) items.get(1)).getItem() == Items.BUCKET) {
+			if(EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, items.get(1)) > 0 && ((ItemStack) items.get(1)).getItem() == Items.BUCKET) {
 				if (itemStack.getItem() == Blocks.WET_SPONGE.asItem() && !((ItemStack) items.get(1)).isEmpty()) {
 					ItemStack iwb = new ItemStack(Items.WATER_BUCKET);
-					iwb.enchant(Enchantments.INFINITY_ARROWS, 1);
+					iwb.addEnchantment(Enchantments.INFINITY, 1);
 					items.set(1, iwb);
 				}
 			}
