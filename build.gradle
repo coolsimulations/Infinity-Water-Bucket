@@ -5,12 +5,12 @@ buildscript {
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 
@@ -18,71 +18,39 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
-group = project.maven_group
+group = project.mod_group
 
 minecraft {
-    mappings channel: 'snapshot', version: "${mappings_version}"
-    accessTransformer = file 'src/main/resources/META-INF/accesstransformer.cfg'
-    runs {
-        client {
-            workingDirectory project.file('run')
+    version = "${minecraft_version}-${forge_version}"
+    mappings = mappings_version
+    runDir = "run"
+    String resolved_core_plugin = mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
+    clientJvmArgs += "-Dfml.coreMods.load=${resolved_core_plugin}"
+    serverJvmArgs += "-Dfml.coreMods.load=${resolved_core_plugin}"
+    String resolved_core_config = mod_mixin_configs.replace('${mod_id}', mod_id)
+    clientRunArgs += "--mixin ${resolved_core_config}"
+    serverRunArgs += "--mixin ${resolved_core_config}"
+    makeObfSourceJar = false
 
-            mods {
-                infinitywaterbucket {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            mods {
-                infinitywaterbucket {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            args '--mod', 'infinitywaterbucket', '--all', '--output', file('src/generated/resources/')
-
-            mods {
-                survivalplus {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
 }
 
 repositories {
     maven { url "https://maven.shedaniel.me" }
     maven { url "https://maven.architectury.dev/" }
     maven { url "https://dvs1.progwml6.com/files/maven/" }
+    maven { url = "https://repo.spongepowered.org/maven" }
 }
 
-mixin {
-    add sourceSets.main, "infinity-water-bucket.refmap.json"
-
-    config "infinity-water-bucket.mixins.json"
-
-    debug.export = true
+configurations {
+    embed
+    compile.extendsFrom(embed)
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
-    processResources.setDuplicatesStrategy(DuplicatesStrategy.WARN)
-    implementation fileTree(dir: 'libs', include: '*.jar')
-
-}
-
-repositories {
-    maven {
-        url = "https://github.com/ricksouth/serilum-forge-maven/raw/maven/"
+    embed('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
+        exclude module: 'guava'
+        exclude module: 'commons-io'
+        exclude module: 'gson'
     }
 }
 
@@ -92,7 +60,6 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        include 'META-INF/mods.toml'
         include 'infinity-water-bucket.mixins.json'
                 
         expand 'version':project.version, 'mcversion':project.minecraft_version
@@ -100,7 +67,27 @@ processResources {
         
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
-        exclude 'META-INF/mods.toml'
+    }
+}
+
+mixin {
+    add sourceSets.main, mod_mixin_refmap.replace('${mod_id}', mod_id)
+}
+
+jar {
+    from(configurations.embed.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }) {
+        exclude "LICENSE.txt", "META-INF/MANIFSET.MF", "META-INF/maven/**", "META-INF/*.RSA", "META-INF/*.SF"
+    }
+
+    manifest {
+        attributes "FMLCorePlugin": mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
+        attributes "FMLCorePluginContainsFMLMod": "false"
+        attributes "ForceLoadAsMod": "true"
+        attributes "TweakClass": "org.spongepowered.asm.launch.MixinTweaker"
+        attributes "TweakOrder": "0"
+        attributes "MixinConfigs": mod_mixin_configs.replace('${mod_id}', mod_id)
     }
 }
 

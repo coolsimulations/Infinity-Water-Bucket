@@ -6,25 +6,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-@Mixin(CowEntity.class)
-public abstract class CowEntityMixin extends AnimalEntity {
+@Mixin(EntityCow.class)
+public abstract class CowEntityMixin extends EntityAnimal {
 
-	protected CowEntityMixin(EntityType<? extends AnimalEntity> type, World world) {
-		super(type, world);
+	public CowEntityMixin(World worldIn) {
+		super(worldIn);
 	}
 
 	@Inject(at = @At("HEAD"), method = "processInteract", cancellable = true)
-	private void iwb$interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<Boolean> info) {
+	private void iwb$interactMob(EntityPlayer player, EnumHand hand, CallbackInfoReturnable<Boolean> info) {
 		ItemStack stack = player.getHeldItem(hand);
 		if(EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.BUCKET && !this.isChild()) {
 			info.setReturnValue(super.processInteract(player, hand));

@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "net.coolsimulations.InfinityWaterBucket.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "infinitywaterbucket.refmap.json",
+  "mixins": [
+    "BucketItemMixin",
+    "CauldronBlockMixin",
+    "EnchantmentMixin",
+    "ArrowInfiniteEnchantmentMixin",
+    "CowEntityMixin",
+    "AbstractFurnaceBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
