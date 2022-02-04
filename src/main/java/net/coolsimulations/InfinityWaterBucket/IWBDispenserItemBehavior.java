@@ -26,7 +26,7 @@ public class IWBDispenserItemBehavior {
 
 				if (EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0 && itemStack.getItem() == Items.WATER_BUCKET) {
 					ItemBucket bucketItem = (ItemBucket)itemStack.getItem();
-					BlockPos blockPos = blockSource.getBlockPos().offset(blockSource.getBlockState().getValue(BlockDispenser.FACING));
+					BlockPos blockPos = blockSource.getBlockPos().offset(BlockDispenser.getFacing(blockSource.getBlockMetadata()));
 					World world = blockSource.getWorld();
 					if (bucketItem.tryPlaceContainedLiquid(null, world, blockPos)) {
 						return itemStack;
@@ -49,7 +49,7 @@ public class IWBDispenserItemBehavior {
 
 				if (EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0 && itemStack.getItem() == Items.BUCKET) {
 					World world = blockSource.getWorld();
-					BlockPos blockPos = blockSource.getBlockPos().offset(blockSource.getBlockState().getValue(BlockDispenser.FACING));
+					BlockPos blockPos = blockSource.getBlockPos().offset(BlockDispenser.getFacing(blockSource.getBlockMetadata()));
 					IBlockState blockState = world.getBlockState(blockPos);
 					Block block = blockState.getBlock();
 
