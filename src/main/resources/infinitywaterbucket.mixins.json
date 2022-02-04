@@ -8,8 +8,7 @@
     "CauldronBlockMixin",
     "EnchantmentMixin",
     "ArrowInfiniteEnchantmentMixin",
-    "CowEntityMixin",
-    "AbstractFurnaceBlockEntityMixin"
+    "CowEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

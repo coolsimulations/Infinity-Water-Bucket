@@ -5,10 +5,8 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import org.spongepowered.asm.launch.MixinBootstrap;
-import org.spongepowered.asm.mixin.MixinEnvironment;
-import org.spongepowered.asm.mixin.Mixins;
 
-import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
 @IFMLLoadingPlugin.Name("InfinityWaterBucket")
 public class CoreMod implements IFMLLoadingPlugin {

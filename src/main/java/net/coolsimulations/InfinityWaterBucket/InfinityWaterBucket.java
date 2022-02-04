@@ -1,15 +1,15 @@
 package net.coolsimulations.InfinityWaterBucket;
 
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.management.UserListOpsEntry;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
-@Mod(modid = IWBReference.MOD_ID, name = IWBReference.MOD_NAME, version = IWBReference.VERSION, acceptedMinecraftVersions = IWBReference.ACCEPTED_VERSIONS, dependencies = IWBReference.DEPENDENCIES, acceptableRemoteVersions = "*", updateJSON = "https://coolsimulations.net/mcmods/infinity-water-bucket/versionchecker.json")
+@Mod(modid = IWBReference.MOD_ID, name = IWBReference.MOD_NAME, version = IWBReference.VERSION, acceptedMinecraftVersions = IWBReference.ACCEPTED_VERSIONS, dependencies = IWBReference.DEPENDENCIES, acceptableRemoteVersions = "*")
 public class InfinityWaterBucket {
 	
 	@EventHandler
@@ -29,9 +29,9 @@ public class InfinityWaterBucket {
 			
 			if(player.mcServer.isDedicatedServer()) {
 				
-				UserListOpsEntry op = player.mcServer.getConfigurationManager().getOppedPlayers().getEntry(player.getGameProfile());
+				UserListOpsEntry op = (UserListOpsEntry)player.mcServer.getConfigurationManager().getOppedPlayers().getEntry(player.getGameProfile());
 				
-				if(op != null && op.getPermissionLevel() == player.mcServer.getOpPermissionLevel()) {
+				if(op != null && op.func_152644_a() == player.mcServer.getOpPermissionLevel()) {
 					messageOutdated(player);
 				}
 			} else {
