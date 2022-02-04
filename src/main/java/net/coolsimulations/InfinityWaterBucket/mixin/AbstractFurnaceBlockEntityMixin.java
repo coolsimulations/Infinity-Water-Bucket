@@ -6,9 +6,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,10 +27,10 @@ public abstract class AbstractFurnaceBlockEntityMixin {
 	private void iwb$modifyWaterBucketBehavior(CallbackInfo info) {
 		if (canSmelt()) {
 			ItemStack itemStack = (ItemStack) furnaceItemStacks[0];
-			if(EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, furnaceItemStacks[1]) > 0 && ((ItemStack) furnaceItemStacks[1]).getItem() == Items.BUCKET) {
-				if (itemStack.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && itemStack.getMetadata() == 1 && furnaceItemStacks[1] != null) {
-					ItemStack iwb = new ItemStack(Items.WATER_BUCKET);
-					iwb.addEnchantment(Enchantments.INFINITY, 1);
+			if(EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, furnaceItemStacks[1]) > 0 && ((ItemStack) furnaceItemStacks[1]).getItem() == Items.bucket) {
+				if (itemStack.getItem() == Item.getItemFromBlock(Blocks.sponge) && itemStack.getMetadata() == 1 && furnaceItemStacks[1] != null) {
+					ItemStack iwb = new ItemStack(Items.water_bucket);
+					iwb.addEnchantment(Enchantment.infinity, 1);
 					furnaceItemStacks[1] = iwb;
 				}
 			}

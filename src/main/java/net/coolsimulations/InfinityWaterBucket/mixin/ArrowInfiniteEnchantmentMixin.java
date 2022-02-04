@@ -15,7 +15,7 @@ public class ArrowInfiniteEnchantmentMixin extends EnchantmentMixin {
 
 	@Override
 	protected void iwb$infinityStub(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
-		if (stack.getItem() == Items.WATER_BUCKET || stack.getItem() == Items.BUCKET) {
+		if (stack.getItem() == Items.water_bucket || stack.getItem() == Items.bucket) {
 			info.setReturnValue(true);
 		}
 	}

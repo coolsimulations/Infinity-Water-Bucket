@@ -7,28 +7,28 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public class IWBDispenserItemBehavior {
 
 	public static void init() {
 
-		IBehaviorDispenseItem water_bucket = BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.getObject(Items.WATER_BUCKET);
+		IBehaviorDispenseItem water_bucket = BlockDispenser.dispenseBehaviorRegistry.getObject(Items.water_bucket);
 
-		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(Items.WATER_BUCKET, new BehaviorDefaultDispenseItem() {
+		BlockDispenser.dispenseBehaviorRegistry.putObject(Items.water_bucket, new BehaviorDefaultDispenseItem() {
 			public ItemStack dispenseStack(IBlockSource blockSource, ItemStack itemStack) {
 
-				if (EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0 && itemStack.getItem() == Items.WATER_BUCKET) {
+				if (EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, itemStack) > 0 && itemStack.getItem() == Items.water_bucket) {
 					ItemBucket bucketItem = (ItemBucket)itemStack.getItem();
 					BlockPos blockPos = blockSource.getBlockPos().offset(BlockDispenser.getFacing(blockSource.getBlockMetadata()));
 					World world = blockSource.getWorld();
-					if (bucketItem.tryPlaceContainedLiquid(null, world, blockPos)) {
+					if (bucketItem.tryPlaceContainedLiquid(world, blockPos)) {
 						return itemStack;
 					} else {
 						return new BehaviorDefaultDispenseItem().dispense(blockSource, itemStack);
@@ -42,12 +42,12 @@ public class IWBDispenserItemBehavior {
 			}
 		});
 
-		IBehaviorDispenseItem bucket = BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.getObject(Items.BUCKET);
+		IBehaviorDispenseItem bucket = BlockDispenser.dispenseBehaviorRegistry.getObject(Items.bucket);
 
-		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(Items.BUCKET, new BehaviorDefaultDispenseItem() {
+		BlockDispenser.dispenseBehaviorRegistry.putObject(Items.bucket, new BehaviorDefaultDispenseItem() {
 			public ItemStack dispenseStack(IBlockSource blockSource, ItemStack itemStack) {
 
-				if (EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0 && itemStack.getItem() == Items.BUCKET) {
+				if (EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, itemStack) > 0 && itemStack.getItem() == Items.bucket) {
 					World world = blockSource.getWorld();
 					BlockPos blockPos = blockSource.getBlockPos().offset(BlockDispenser.getFacing(blockSource.getBlockMetadata()));
 					IBlockState blockState = world.getBlockState(blockPos);

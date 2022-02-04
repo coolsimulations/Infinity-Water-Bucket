@@ -1,6 +1,7 @@
 package net.coolsimulations.InfinityWaterBucket;
 
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.management.UserListOpsEntry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -23,12 +24,18 @@ public class InfinityWaterBucket {
 	public void onPlayerLogin(PlayerLoggedInEvent event)
 	{
 		if(IWBUpdateHandler.isOld == true && event.player instanceof EntityPlayerMP) {
-			if(event.player.getServer().isDedicatedServer()) {
-				if(event.player.getServer().getPlayerList().getOppedPlayers().getPermissionLevel(event.player.getGameProfile()) == event.player.getServer().getOpPermissionLevel()) {
-					messageOutdated((EntityPlayerMP) event.player);
+			
+			EntityPlayerMP player = (EntityPlayerMP) event.player;
+			
+			if(player.mcServer.isDedicatedServer()) {
+				
+				UserListOpsEntry op = player.mcServer.getConfigurationManager().getOppedPlayers().getEntry(player.getGameProfile());
+				
+				if(op != null && op.getPermissionLevel() == player.mcServer.getOpPermissionLevel()) {
+					messageOutdated(player);
 				}
 			} else {
-				messageOutdated((EntityPlayerMP) event.player);
+				messageOutdated(player);
 			}
 		}
 	}
