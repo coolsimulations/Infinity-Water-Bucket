@@ -1,5 +1,7 @@
 package net.coolsimulations.InfinityWaterBucket.mixin;
 
+import javax.annotation.Nullable;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,10 +30,10 @@ public abstract class CauldronBlockMixin {
 	public abstract void setWaterLevel(World world, BlockPos blockPos, IBlockState blockState, int i);
 
 	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "onBlockActivated", cancellable = true)
-	public void iwb$stopCauldronFromUsingInfinityWaterBucket(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, CallbackInfoReturnable<Boolean> info) {
+	public void iwb$stopCauldronFromUsingInfinityWaterBucket(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ, CallbackInfoReturnable<Boolean> info) {
 		ItemStack stack = player.getHeldItem(hand);
 
-		if(EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0 && !stack.isEmpty() && !world.isRemote) {
+		if(EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0 && stack != null && !world.isRemote) {
 			if (stack.getItem() == Items.BUCKET) {
 				player.addStat(StatList.CAULDRON_USED);
 				this.setWaterLevel(world, blockPos, blockState, 0);

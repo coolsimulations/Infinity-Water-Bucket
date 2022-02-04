@@ -24,8 +24,7 @@ public abstract class BucketItemMixin {
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;addStat(Lnet/minecraft/stats/StatBase;)V", shift = At.Shift.AFTER), method = "onItemRightClick", slice = @Slice(
 			from = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;isReplaceable(Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)Z")
 			), cancellable = true)
-    private void iwb$getEmptiedStack(World world, EntityPlayer playerEntity, EnumHand hand, CallbackInfoReturnable<ActionResult<ItemStack>> info) {
-		ItemStack stack = playerEntity.getHeldItem(hand);
+    private void iwb$getEmptiedStack(ItemStack stack, World world, EntityPlayer player, EnumHand hand, CallbackInfoReturnable<ActionResult<ItemStack>> info) {
 		if (EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0 && stack.getItem() == Items.WATER_BUCKET) {
             info.setReturnValue(new ActionResult(EnumActionResult.SUCCESS, stack));
         }

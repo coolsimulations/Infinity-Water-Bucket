@@ -34,8 +34,8 @@ public class InfinityWaterBucket {
 	}
 
 	private static void messageOutdated(EntityPlayerMP player) {
-		player.sendMessage(IWBUpdateHandler.updateInfo);
+		player.addChatMessage(IWBUpdateHandler.updateInfo);
 		if(IWBUpdateHandler.updateVersionInfo != null)
-			player.sendMessage(IWBUpdateHandler.updateVersionInfo);
+			player.addChatMessage(IWBUpdateHandler.updateVersionInfo);
 	}
 }
