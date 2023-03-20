@@ -20,13 +20,13 @@ public class InfinityWaterBucket {
 	@SubscribeEvent
 	public static void onPlayerLogin(PlayerLoggedInEvent event)
 	{
-		if(IWBUpdateHandler.isOld == true && event.getPlayer() instanceof ServerPlayer) {
-			if(event.getPlayer().getServer().isDedicatedServer()) {
-				if(event.getPlayer().hasPermissions(event.getPlayer().getServer().getOperatorUserPermissionLevel())) {
-					messageOutdated((ServerPlayer) event.getPlayer());
+		if(IWBUpdateHandler.isOld == true && event.getEntity() instanceof ServerPlayer) {
+			if(event.getEntity().getServer().isDedicatedServer()) {
+				if(event.getEntity().hasPermissions(event.getEntity().getServer().getOperatorUserPermissionLevel())) {
+					messageOutdated((ServerPlayer) event.getEntity());
 				}
 			} else {
-				messageOutdated((ServerPlayer) event.getPlayer());
+				messageOutdated((ServerPlayer) event.getEntity());
 			}
 		}
 	}

@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
@@ -20,13 +21,13 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 public abstract class AbstractFurnaceBlockEntityMixin {
 
 	@Shadow
-	public boolean canBurn(@Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i) {
+	public static boolean canBurn(RegistryAccess registryAccess, @Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i) {
 		throw new AssertionError();
 	}
 
 	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "burn", cancellable = true)
-	private void iwb$modifyWaterBucketBehavior(@Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i, CallbackInfoReturnable<Boolean> cir) {
-		if (recipe != null && canBurn(recipe, nonNullList, i)) {
+	private static void iwb$modifyWaterBucketBehavior(RegistryAccess registryAccess, @Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i, CallbackInfoReturnable<Boolean> cir) {
+		if (recipe != null && canBurn(registryAccess, recipe, nonNullList, i)) {
 			ItemStack itemStack = (ItemStack) nonNullList.get(0);
 			if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, nonNullList.get(1)) > 0 && ((ItemStack) nonNullList.get(1)).is(Items.BUCKET)) {
 				if (itemStack.is(Blocks.WET_SPONGE.asItem()) && !((ItemStack) nonNullList.get(1)).isEmpty()) {
