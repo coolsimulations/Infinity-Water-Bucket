@@ -21,12 +21,12 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 public abstract class AbstractFurnaceBlockEntityMixin {
 
 	@Shadow
-	public static boolean canBurn(RegistryAccess registryAccess, @Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i) {
+	public boolean canBurn(RegistryAccess registryAccess, @Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i) {
 		throw new AssertionError();
 	}
 
 	@Inject(at = @At(value = "HEAD", ordinal = 0), method = "burn", cancellable = true)
-	private static void iwb$modifyWaterBucketBehavior(RegistryAccess registryAccess, @Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i, CallbackInfoReturnable<Boolean> cir) {
+	private void iwb$modifyWaterBucketBehavior(RegistryAccess registryAccess, @Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i, CallbackInfoReturnable<Boolean> cir) {
 		if (recipe != null && canBurn(registryAccess, recipe, nonNullList, i)) {
 			ItemStack itemStack = (ItemStack) nonNullList.get(0);
 			if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, nonNullList.get(1)) > 0 && ((ItemStack) nonNullList.get(1)).is(Items.BUCKET)) {
