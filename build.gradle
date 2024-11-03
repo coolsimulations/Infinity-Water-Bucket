@@ -1,118 +1,105 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
-    }
+plugins {
+    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'eclipse'
+def forge_loader_version = "${forge_version.takeWhile { it != '.' }}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+def minecraft_x_version = "${minecraft_version}"
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
-
-minecraft {
-    mappings channel: 'official', version: '1.19.4'
-    accessTransformer = file 'src/main/resources/META-INF/accesstransformer.cfg'
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            mods {
-                infinitywaterbucket {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            mods {
-                infinitywaterbucket {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            args '--mod', 'infinitywaterbucket', '--all', '--output', file('src/generated/resources/')
-
-            mods {
-                survivalplus {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+if (minecraft_x_version.count('.') >= 2) {
+    minecraft_x_version = minecraft_version.substring(0, minecraft_version.length() - 1) + "x"
+} else {
+    minecraft_x_version = minecraftVersion + '.x'
 }
 
-repositories {
-    maven { url "https://maven.shedaniel.me" }
-    maven { url "https://maven.architectury.dev/" }
-    maven { url "https://dvs1.progwml6.com/files/maven/" }
-}
+subprojects {
+    apply plugin: 'java'
 
-mixin {
-    add sourceSets.main, "infinity-water-bucket.refmap.json"
-
-    config "infinity-water-bucket.mixins.json"
-
-    debug.export = true
-}
-
-dependencies {
-    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
-    processResources.setDuplicatesStrategy(DuplicatesStrategy.WARN)
-    implementation fileTree(dir: 'libs', include: '*.jar')
-
-}
-
-repositories {
-    maven {
-        url = "https://github.com/ricksouth/serilum-forge-maven/raw/maven/"
-    }
-}
-
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft_version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        include 'META-INF/mods.toml'
-        include 'infinity-water-bucket.mixins.json'
-                
-        expand 'version':project.version, 'mcversion':project.minecraft_version
-    }
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
         
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-        exclude 'META-INF/mods.toml'
+    jar {
+        from(rootProject.file("LICENSE")) {
+            rename { "${it}_${mod_name}" }
+        }
+        manifest {
+            attributes([
+                'Specification-Title'     : mod_name,
+                'Specification-Vendor'    : mod_author,
+                'Specification-Version'   : project.jar.archiveVersion,
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_author,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'Timestamp'               : System.currentTimeMillis(),
+                'Built-On-Java'           : "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
+                'Built-On-Minecraft'      : minecraft_version
+            ])
+        }
     }
-}
 
-task packDev(type: Jar) {
-    from sourceSets.main.output
-    from sourceSets.main.allJava
-    baseName = "Infinity-Water-Bucket-Dev"
-    version = "${project.minecraft_version}-${project.version}"
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'Sponge / Mixin'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
+        maven {
+            name = 'BlameJared Maven (JEI / CraftTweaker / Bookshelf)'
+            url = 'https://maven.blamejared.com'
+        }
+        maven {
+            name = 'TerraformersMC / Mod Menu'
+            url = 'https://maven.terraformersmc.com/'
+        }
+        maven {
+            name = "Jared's Maven / JEI"
+            url = "https://maven.blamejared.com/"
+        }
+        maven {
+            name = "ModMaven / JEI fallback"
+            url = "https://modmaven.dev/"
+        }
+        maven {
+            name = "SheDaniel / Cloth Config"
+            url = "https://maven.shedaniel.me/"
+        }
+    }
 
-    println(defaultTasks)
-}
+    tasks.withType(JavaCompile).configureEach {
+    
+        it.options.encoding = 'UTF-8'
+        it.options.getRelease().set(17)
+    }
 
-artifacts {
-    archives packDev
+    processResources {
+        def expandProps = [
+                "group": project.group,
+                "version": mod_version,
+                "minecraft_version": minecraft_version,
+                "minecraft_x_version": minecraft_x_version,
+                "forge_version": forge_version,
+                "forge_loader_version": forge_loader_version,
+                "fabric_loader_version": fabric_loader_version,
+                "mod_version": mod_version,
+                "mod_name": mod_name,
+                "mod_author": mod_author,
+                "mod_id": mod_id,
+                "mod_homepage": mod_homepage,
+                "mod_source": mod_source,
+                "mod_issues": mod_issues,
+                "mod_desc": mod_desc,
+                "mod_license": mod_license,
+                "mod_credit": mod_credit
+        ]
+
+        filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
+            expand expandProps
+        }
+        inputs.properties(expandProps)
+    }
+
+    tasks.withType(GenerateModuleMetadata).configureEach {
+
+        enabled = false
+    }
 }

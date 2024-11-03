@@ -1,0 +1,11 @@
+{
+  "modmenu.guilded": "Guilded",
+  "infinitywaterbucket.config.gui.title": "Infinity Water Buckets Config",
+  "infinitywaterbucket.config.gui.common": "Common",
+  "infinitywaterbucket.config.gui.infinite_lava_bucket": "Infinite Lava Buckets",
+  "infinitywaterbucket.config.gui.infinite_lava_bucket.tooltip": "If true, lava buckets can be enchanted too",
+  "infinitywaterbucket.config.gui.infinite_milk_bucket": "Infinite Milk Buckets",
+  "infinitywaterbucket.config.gui.infinite_milk_bucket.tooltip": "If true, milk buckets can be enchanted too",
+  "infinitywaterbucket.config.gui.infinite_solid_bucket": "Infinite Solid Buckets",
+  "infinitywaterbucket.config.gui.infinite_solid_bucket.tooltip": "If true, powdered snow buckets can be enchanted too"
+}

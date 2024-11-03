@@ -1,18 +1,24 @@
-/build/
-/bin/
-/libs/
-/eclipse/
-/run/
-/.gradle/
+# idea
+/.idea/
+
+# eclipse
 /.settings/
-/src/test/
-/out/
 .classpath
 .project
-.idea
-*.launch*
-*.gradleBOP
-*.propertiesBOP
+
+# gradle
+/build/
+*/build/
+/.gradle/
+*/.gradle/
+
+# other
+/run/
+*/run/
+*/runs/
+/logs/
+*/src/generated/resources/.cache/
+*/src/main/generated/.cache/
 
 #OS generated files
 *.DS_Store

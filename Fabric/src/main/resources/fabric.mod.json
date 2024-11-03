@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+
+  "name": "${mod_name}",
+  "description": "${mod_desc}",
+  "authors": [ "coolsim", "alkyaLy" ],
+
+  "contact": {
+    "homepage": "${mod_homepage}",
+    "sources": "${mod_source}",
+    "issues": "${mod_issues}"
+  },
+
+  "license": "${mod_license}",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.coolsimulations.InfinityWaterBucket.InfinityWaterBucket"
+    ],
+    "modmenu": [
+      "net.coolsimulations.InfinityWaterBucket.InfinityWaterBucketModMenu"
+    ]
+  },
+
+  "mixins": [
+    "infinitywaterbucket.common.mixins.json",
+    "infinitywaterbucket.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "${minecraft_x_version}"
+  },
+
+  "custom": {
+    "modupdater": {
+      "strategy": "curseforge",
+      "projectID": 423069
+    },
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/7DDsHfQ",
+        "modmenu.guilded": "https://guilded.gg/i/Wkn138B2"
+      }
+    },
+    "configured": {
+      "configs": [],
+      "background": "minecraft:textures/block/tube_coral_block.png"
+    },
+    "catalogue": {
+      "banner": "icon.png",
+      "background": "minecraft:textures/block/tube_coral_block.png"
+    }
+  }
+}
