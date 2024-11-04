@@ -8,7 +8,8 @@
     "ArrowInfiniteEnchantmentMixin", "EnchantmentMixin",
     "AbstractFishMixin", "AxolotlMixin",
     "BucketItemMixin", "ItemUtilsMixin", "MilkBucketItemMixin", "SolidBucketItemMixin",
-    "DispenseItemBehavior16Mixin", "DispenseItemBehavior17Mixin"
+    "DispenseItemBehavior6Mixin",
+    "DispenseItemBehavior7Mixin"
   ],
   "injectors": {
     "defaultRequire": 1

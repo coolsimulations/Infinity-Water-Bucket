@@ -27,7 +27,7 @@ public abstract class AxolotlMixin extends Animal {
     @Inject(at = @At("HEAD"), method = "mobInteract", cancellable = true)
     public void iwb$mobInteract(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> info) {
         ItemStack stack = player.getItemInHand(interactionHand);
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0 && stack.is(Items.WATER_BUCKET))
+        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, stack) > 0 && stack.is(Items.WATER_BUCKET))
             info.setReturnValue(super.mobInteract(player, interactionHand));
     }
 }

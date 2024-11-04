@@ -23,7 +23,7 @@ public interface BucketableMixin {
     @Inject(at = @At ("HEAD" ), method = "bucketMobPickup", cancellable = true, require = 0)
     private static <T extends LivingEntity & Bucketable> void iwb$bucketMobPickup(Player player, InteractionHand interactionHand, T livingEntity, CallbackInfoReturnable<Optional<InteractionResult>> info) {
         ItemStack stack = player.getItemInHand (interactionHand);
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0 && stack.is (Items.WATER_BUCKET) && livingEntity.isAlive())
+        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, stack) > 0 && stack.is (Items.WATER_BUCKET) && livingEntity.isAlive())
             info.setReturnValue (Optional.empty());
     }
 }

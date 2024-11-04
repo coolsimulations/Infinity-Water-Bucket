@@ -19,12 +19,12 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-@Mixin(targets = "net/minecraft/core/dispenser/DispenseItemBehavior$17")
-public abstract class DispenseItemBehavior17Mixin extends DefaultDispenseItemBehavior {
+@Mixin(targets = "net/minecraft/core/dispenser/DispenseItemBehavior$7")
+public abstract class DispenseItemBehavior7Mixin extends DefaultDispenseItemBehavior {
 
     @Inject(at = @At(value = "HEAD", ordinal = 0), method = "execute", cancellable = true)
     private void iwb$getEmptyBucket(BlockSource blockSource, ItemStack itemStack, CallbackInfoReturnable<ItemStack> cir) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, itemStack) > 0 && itemStack.is(Items.BUCKET)) {
+        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0 && itemStack.is(Items.BUCKET)) {
             ServerLevel serverLevel = blockSource.level();
             BlockPos blockPos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
             BlockState blockState = serverLevel.getBlockState(blockPos);

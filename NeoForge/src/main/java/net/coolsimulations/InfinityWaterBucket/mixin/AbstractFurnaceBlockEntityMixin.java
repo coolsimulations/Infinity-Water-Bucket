@@ -21,18 +21,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AbstractFurnaceBlockEntityMixin {
 
     @Shadow
-    private boolean canBurn(RegistryAccess registryAccess, @Nullable RecipeHolder<?> recipe, NonNullList<ItemStack> nonNullList, int i) {
+    private static boolean canBurn(RegistryAccess registryAccess, @Nullable RecipeHolder<?> recipe, NonNullList<ItemStack> nonNullList, int i, AbstractFurnaceBlockEntity furnace) {
         throw new AssertionError();
     }
 
     @Inject(at = @At(value = "HEAD", ordinal = 0), method = "burn", cancellable = true)
-    private void iwb$modifyWaterBucketBehavior(RegistryAccess registryAccess, @Nullable RecipeHolder<?> recipe, NonNullList<ItemStack> nonNullList, int i, CallbackInfoReturnable<Boolean> cir) {
-        if (recipe != null && canBurn(registryAccess, recipe, nonNullList, i)) {
+    private static void iwb$modifyWaterBucketBehavior(RegistryAccess registryAccess, RecipeHolder<?> recipe, NonNullList<ItemStack> nonNullList, int i, AbstractFurnaceBlockEntity furnace, CallbackInfoReturnable<Boolean> cir) {
+        if (recipe != null && canBurn(registryAccess, recipe, nonNullList, i, furnace)) {
             ItemStack itemStack = nonNullList.get(0);
-            if(nonNullList.get(1).getEnchantmentLevel(Enchantments.INFINITY_ARROWS) > 0 && nonNullList.get(1).is(Items.BUCKET)) {
+            if(nonNullList.get(1).getEnchantmentLevel(Enchantments.INFINITY) > 0 && nonNullList.get(1).is(Items.BUCKET)) {
                 if (itemStack.is(Blocks.WET_SPONGE.asItem()) && !nonNullList.get(1).isEmpty()) {
                     ItemStack iwb = new ItemStack(Items.WATER_BUCKET);
-                    iwb.enchant(Enchantments.INFINITY_ARROWS, 1);
+                    iwb.enchant(Enchantments.INFINITY, 1);
                     nonNullList.set(1, iwb);
                 }
             }
@@ -41,7 +41,7 @@ public abstract class AbstractFurnaceBlockEntityMixin {
 
     @Redirect(method = "serverTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getCraftingRemainingItem()Lnet/minecraft/world/item/ItemStack;"))
     private static ItemStack iwb$modifyLavaBucketBehavior(ItemStack item) {
-        if (item.getEnchantmentLevel(Enchantments.INFINITY_ARROWS) > 0 && item.is(Items.LAVA_BUCKET) && InfinityWaterBucketCommon.CONFIG.getInfiniteLavaBucket())
+        if (item.getEnchantmentLevel(Enchantments.INFINITY) > 0 && item.is(Items.LAVA_BUCKET) && InfinityWaterBucketCommon.CONFIG.getInfiniteLavaBucket())
             return item;
         return item.getCraftingRemainingItem();
     }

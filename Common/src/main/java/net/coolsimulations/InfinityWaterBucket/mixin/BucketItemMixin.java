@@ -18,7 +18,7 @@ public abstract class BucketItemMixin {
 
     @Inject(at = @At("HEAD"), method = "getEmptySuccessItem", cancellable = true)
     private static void iwb$getEmptySuccessItem(ItemStack stack, Player player, CallbackInfoReturnable<ItemStack> info) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0 && (stack.is(Items.WATER_BUCKET) ||
+        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, stack) > 0 && (stack.is(Items.WATER_BUCKET) ||
                 (stack.is(Items.LAVA_BUCKET) && InfinityWaterBucketCommon.CONFIG.getInfiniteLavaBucket()) ||
                 InfinityWaterBucketCommon.isMilkBucket(stack.getItem()) ||
                 InfinityWaterBucketCommon.isSolidBucket(stack.getItem())))

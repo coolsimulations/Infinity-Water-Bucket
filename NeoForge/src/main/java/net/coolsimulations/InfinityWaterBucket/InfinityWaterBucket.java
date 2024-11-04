@@ -1,18 +1,20 @@
 package net.coolsimulations.InfinityWaterBucket;
 
 import net.coolsimulations.InfinityWaterBucket.config.IWBConfig;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 
 @Mod(value = IWBReference.MOD_ID)
-@Mod.EventBusSubscriber(modid = IWBReference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = IWBReference.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class InfinityWaterBucket {
 
-    public InfinityWaterBucket() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IWBConfig.commonSpec);
+    public InfinityWaterBucket(IEventBus modBus) {
+        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, IWBConfig.commonSpec);
     }
 
     @SubscribeEvent

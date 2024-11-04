@@ -27,7 +27,7 @@ public abstract class SolidBucketItemMixin {
 
     @ModifyArg(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V"), index = 1)
     private ItemStack injected(ItemStack stack) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, iwb$solid) > 0 && InfinityWaterBucketCommon.CONFIG.getInfiniteSolidBucket())
+        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, iwb$solid) > 0 && InfinityWaterBucketCommon.CONFIG.getInfiniteSolidBucket())
             return iwb$solid;
         return stack;
     }

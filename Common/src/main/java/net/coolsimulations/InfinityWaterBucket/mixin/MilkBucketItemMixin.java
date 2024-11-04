@@ -26,7 +26,7 @@ public abstract class MilkBucketItemMixin {
 
     @Inject(at = @At("RETURN"), method = "finishUsingItem", cancellable = true)
     private void iwb$finishUsingItem(ItemStack stack, Level level, LivingEntity entity, CallbackInfoReturnable<ItemStack> info) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, iwb$milk) > 0 && InfinityWaterBucketCommon.CONFIG.getInfiniteMilkBucket())
+        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, iwb$milk) > 0 && InfinityWaterBucketCommon.CONFIG.getInfiniteMilkBucket())
             info.setReturnValue(iwb$milk);
     }
 }
