@@ -2,6 +2,7 @@ package net.coolsimulations.InfinityWaterBucket.mixin;
 
 import net.coolsimulations.InfinityWaterBucket.InfinityWaterBucketCommon;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,7 +15,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
@@ -24,12 +24,12 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 public abstract class AbstractFurnaceBlockEntityMixin {
 
     @Shadow
-    private static boolean canBurn(RegistryAccess registryAccess, @Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i) {
+    private static boolean canBurn(RegistryAccess registryAccess, @Nullable RecipeHolder<?> recipeHolder, NonNullList<ItemStack> nonNullList, int i) {
         throw new AssertionError();
     }
 
     @Inject(at = @At(value = "HEAD", ordinal = 0), method = "burn", cancellable = true)
-    private static void iwb$modifyWaterBucketBehavior(RegistryAccess registryAccess, @Nullable Recipe<?> recipe, NonNullList<ItemStack> nonNullList, int i, CallbackInfoReturnable<Boolean> cir) {
+    private static void iwb$modifyWaterBucketBehavior(RegistryAccess registryAccess, @Nullable RecipeHolder<?> recipe, NonNullList<ItemStack> nonNullList, int i, CallbackInfoReturnable<Boolean> cir) {
         if (recipe != null && canBurn(registryAccess, recipe, nonNullList, i)) {
             ItemStack itemStack = nonNullList.get(0);
             if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, nonNullList.get(1)) > 0 && nonNullList.get(1).is(Items.BUCKET)) {

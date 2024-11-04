@@ -1,7 +1,6 @@
 modLoader="javafml"
-loaderVersion="[${forge_loader_version},)"
+loaderVersion="[${neoforge_loader_version},)"
 issueTrackerURL="${mod_issues}"
-logoFile="logo.png"
 license="${mod_license}"
 
 [[mods]]
@@ -9,15 +8,23 @@ license="${mod_license}"
     version="${version}"
     updateJSONURL="https://coolsimulations.net/mcmods/infinity-water-bucket/versionchecker.json"
     displayURL="${mod_homepage}"
+    logoFile="logo.png"
+    logoBlur=false
     displayName="${mod_name}"
     credits="${mod_credit}"
     authors="${mod_author}"
     description="${mod_desc}"
 
+[[mixins]]
+    config="${mod_id}.common.mixins.json"
+
+[[mixins]]
+    config="${mod_id}.mixins.json"
+
 [[dependencies.${mod_id}]]
-    modId="forge"
+    modId="neoforge"
     mandatory=true
-    versionRange="[${forge_version},)"
+    versionRange="[${neoforge_version},)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.${mod_id}]]

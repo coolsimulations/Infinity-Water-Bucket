@@ -1,12 +1,12 @@
 package net.coolsimulations.InfinityWaterBucket.mixin;
 
 import net.coolsimulations.InfinityWaterBucket.InfinityWaterBucketCommon;
+import net.minecraft.core.dispenser.BlockSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.core.BlockSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
