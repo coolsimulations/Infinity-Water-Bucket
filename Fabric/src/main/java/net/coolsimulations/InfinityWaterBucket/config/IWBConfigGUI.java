@@ -23,7 +23,7 @@ public class IWBConfigGUI {
             IWBConfig.load(IWBConfig.getFile());
         });
 
-        builder.setDefaultBackgroundTexture(new ResourceLocation("minecraft:textures/block/tube_coral_block.png"));
+        builder.setDefaultBackgroundTexture(ResourceLocation.withDefaultNamespace("textures/block/tube_coral_block.png"));
 
         ConfigCategory common = builder.getOrCreateCategory(Component.translatable(InfinityWaterBucketCommon.CONFIG.getTranslationKey("common")));
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();

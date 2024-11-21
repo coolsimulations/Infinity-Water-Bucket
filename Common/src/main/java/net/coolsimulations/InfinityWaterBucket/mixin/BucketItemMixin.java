@@ -10,15 +10,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 
 @Mixin(BucketItem.class)
 public abstract class BucketItemMixin {
 
     @Inject(at = @At("HEAD"), method = "getEmptySuccessItem", cancellable = true)
     private static void iwb$getEmptySuccessItem(ItemStack stack, Player player, CallbackInfoReturnable<ItemStack> info) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, stack) > 0 && (stack.is(Items.WATER_BUCKET) ||
+        if (InfinityWaterBucketCommon.hasInfinity(stack) && (stack.is(Items.WATER_BUCKET) ||
                 (stack.is(Items.LAVA_BUCKET) && InfinityWaterBucketCommon.CONFIG.getInfiniteLavaBucket()) ||
                 InfinityWaterBucketCommon.isMilkBucket(stack.getItem()) ||
                 InfinityWaterBucketCommon.isSolidBucket(stack.getItem())))

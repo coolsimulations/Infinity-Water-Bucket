@@ -5,8 +5,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SolidBucketItem;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,7 +25,7 @@ public abstract class SolidBucketItemMixin {
 
     @ModifyArg(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V"), index = 1)
     private ItemStack injected(ItemStack stack) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, iwb$solid) > 0 && InfinityWaterBucketCommon.CONFIG.getInfiniteSolidBucket())
+        if (InfinityWaterBucketCommon.hasInfinity(iwb$solid) && InfinityWaterBucketCommon.CONFIG.getInfiniteSolidBucket())
             return iwb$solid;
         return stack;
     }
