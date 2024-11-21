@@ -2,13 +2,13 @@ package net.coolsimulations.InfinityWaterBucket;
 
 import net.coolsimulations.InfinityWaterBucket.config.IWBConfigCommon;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MilkBucketItem;
 import net.minecraft.world.item.SolidBucketItem;
+import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.ServiceLoader;
@@ -30,7 +30,7 @@ public class InfinityWaterBucketCommon {
     }
 
     public static boolean isMilkBucket(ItemLike item) {
-        return item.asItem() instanceof MilkBucketItem && item.asItem().hasCraftingRemainingItem() && item.asItem().getCraftingRemainingItem() == Items.BUCKET && InfinityWaterBucketCommon.CONFIG.getInfiniteMilkBucket();
+        return item.asItem().components().get(DataComponents.CONSUMABLE) == Consumables.MILK_BUCKET && item.asItem().getCraftingRemainder().getItem() == Items.BUCKET && InfinityWaterBucketCommon.CONFIG.getInfiniteMilkBucket();
     }
 
     public static boolean isSolidBucket(ItemLike item) {

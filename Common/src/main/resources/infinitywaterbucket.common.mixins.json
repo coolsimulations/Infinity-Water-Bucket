@@ -7,9 +7,10 @@
   "mixins": [
     "EnchantmentMixin",
     "AbstractFishMixin", "AxolotlMixin",
-    "BucketItemMixin", "ItemUtilsMixin", "MilkBucketItemMixin", "SolidBucketItemMixin",
-    "DispenseItemBehavior6Mixin",
-    "DispenseItemBehavior7Mixin"
+    "BucketItemMixin", "ItemUtilsMixin",
+    "ItemStackMixin", "SolidBucketItemMixin",
+    "DispenseItemBehavior5Mixin",
+    "DispenseItemBehavior6Mixin"
   ],
   "injectors": {
     "defaultRequire": 1
