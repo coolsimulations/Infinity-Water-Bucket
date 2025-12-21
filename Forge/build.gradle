@@ -1,15 +1,13 @@
 plugins {
     id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
+    id 'net.minecraftforge.gradle' version '[6.0.36,6.2)'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
 base {
     archivesName = "${mod_name}-Forge-${minecraft_version}-${mod_version}".replace(' ', '-')
 }
 mixin {
-    //add(sourceSets.main, "${mod_id}.refmap.json")
-
     config("${mod_id}.common.mixins.json")
     config("${mod_id}.mixins.json")
 }
@@ -82,9 +80,6 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
     // Hack fix for now, force jopt-simple to be exactly 5.0.4 because Mojang ships that version, but some transitive dependencies request 6.0+
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
-    //compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    //compileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    //runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     compileOnly project(":Common")
     testCompileOnly project(":Common")
 }

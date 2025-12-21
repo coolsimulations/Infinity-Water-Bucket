@@ -2,17 +2,17 @@ package net.coolsimulations.InfinityWaterBucket;
 
 import net.coolsimulations.InfinityWaterBucket.config.IWBConfig;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(value = IWBReference.MOD_ID)
 @Mod.EventBusSubscriber(modid = IWBReference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class InfinityWaterBucket {
 
-    public InfinityWaterBucket() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IWBConfig.commonSpec);
+    public InfinityWaterBucket(FMLJavaModLoadingContext context) {
+        context.registerConfig(ModConfig.Type.COMMON, IWBConfig.commonSpec);
     }
 
     @SubscribeEvent

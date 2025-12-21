@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(IItemStackExtension.class)
 public interface IItemStackExtensionMixin {
 
-    @Shadow abstract ItemStack self();
+    @Shadow ItemStack self();
 
     /**
      * And, of course, NeoForge has to make this more difficult by overwriting the bad method

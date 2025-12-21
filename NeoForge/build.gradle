@@ -30,8 +30,8 @@ runs {
         systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
     }
 
-    data {
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', project(":Common").file('src/main/resources/').getAbsolutePath()
+    clientData {
+        arguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', project(":Common").file('src/main/resources/').getAbsolutePath()
     }
 }
 
@@ -39,9 +39,6 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
-    //implementation "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
-    //implementation "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
-    //implementation "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
     compileOnly project(":Common")
 }
 
