@@ -1,11 +1,14 @@
 plugins {
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.170'
+    id 'net.neoforged.gradle.userdev' version '7.1.21'
     id 'java-library'
 }
 base {
     archivesName = "${mod_name}-NeoForge-${minecraft_version}-${mod_version}".replace(' ', '-')
+    tasks.withType(AbstractTestTask).configureEach {
+        failOnNoDiscoveredTests = false
+    }
 }
 
 // Automatically enable neoforge AccessTransformers if the file exists
@@ -23,7 +26,7 @@ runs {
     }
     server {
         systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
+        arguments '--nogui'
     }
 
     gameTestServer {

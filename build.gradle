@@ -1,12 +1,12 @@
 plugins {
-    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
+    id "org.jetbrains.gradle.plugin.idea-ext" version "1.4.1"
 }
 
 def forge_loader_version = "${forge_version.takeWhile { it != '.' }}"
 
 def minecraft_x_version = "${minecraft_version}"
 
-if (minecraft_x_version.count('.') >= 2) {
+if (minecraft_x_version.count('.') >= 1) {
     minecraft_x_version = minecraft_version.substring(0, minecraft_version.length() - 1) + "x"
 } else {
     minecraft_x_version = minecraftVersion + '.x'
@@ -15,7 +15,7 @@ if (minecraft_x_version.count('.') >= 2) {
 subprojects {
     apply plugin: 'java'
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(25)
         
     jar {
         from(rootProject.file("LICENSE")) {
@@ -72,7 +72,7 @@ subprojects {
     tasks.withType(JavaCompile).configureEach {
     
         it.options.encoding = 'UTF-8'
-        it.options.getRelease().set(21)
+        it.options.getRelease().set(25)
     }
 
     processResources {

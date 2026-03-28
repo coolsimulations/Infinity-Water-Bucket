@@ -30,7 +30,7 @@ public class InfinityWaterBucketCommon {
     }
 
     public static boolean isMilkBucket(ItemLike item) {
-        return item.asItem().components().get(DataComponents.CONSUMABLE) == Consumables.MILK_BUCKET && item.asItem().getCraftingRemainder().getItem() == Items.BUCKET && InfinityWaterBucketCommon.CONFIG.getInfiniteMilkBucket();
+        return item.asItem().components().get(DataComponents.CONSUMABLE) == Consumables.MILK_BUCKET && item.asItem().getCraftingRemainder().item().value() == Items.BUCKET && InfinityWaterBucketCommon.CONFIG.getInfiniteMilkBucket();
     }
 
     public static boolean isSolidBucket(ItemLike item) {

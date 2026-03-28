@@ -2,7 +2,7 @@ plugins {
     id 'idea'
     id 'java'
     id 'maven-publish'
-    id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
+    id 'org.spongepowered.gradle.vanilla' version '0.3.2-SNAPSHOT'
 }
 base {
     archivesName = "${mod_name}-Common-${minecraft_version}-${mod_version}".replace(' ', '-')
@@ -15,7 +15,7 @@ minecraft {
 }
 
 dependencies {
-     compileOnly 'org.spongepowered:mixin:0.8.5'
+     compileOnly 'org.spongepowered:mixin:0.8.7'
      implementation 'com.google.code.findbugs:jsr305:3.0.1'
 }
 

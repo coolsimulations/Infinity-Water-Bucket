@@ -1,6 +1,7 @@
 {
   "pack": {
-    "pack_format": 63,
-    "description": "Adds Infinity Water Bucket resources - by coolsim"
+    "description": "Adds Infinity Water Bucket resources - by coolsim",
+    "min_format": 84,
+    "max_format": 84
   }
 }

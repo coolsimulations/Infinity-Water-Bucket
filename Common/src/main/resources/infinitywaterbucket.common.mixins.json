@@ -9,8 +9,8 @@
     "AbstractFishMixin", "AxolotlMixin",
     "BucketItemMixin", "ItemUtilsMixin",
     "ItemStackMixin", "SolidBucketItemMixin",
-    "DispenseItemBehavior4Mixin",
-    "DispenseItemBehavior5Mixin"
+    "DispenseItemBehavior3Mixin",
+    "DispenseItemBehavior4Mixin"
   ],
   "injectors": {
     "defaultRequire": 1

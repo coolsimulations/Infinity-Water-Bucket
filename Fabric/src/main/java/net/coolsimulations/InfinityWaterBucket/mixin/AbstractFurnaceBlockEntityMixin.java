@@ -13,18 +13,18 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class AbstractFurnaceBlockEntityMixin {
 
-    @Redirect(method = "burn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z", ordinal = 1))
-    private static boolean injected(ItemStack stack, Item item) {
+    @Redirect(method = "burn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Ljava/lang/Object;)Z", ordinal = 1))
+    private static boolean injected(ItemStack stack, Object item) {
         if (InfinityWaterBucketCommon.hasInfinity(stack))
             return false;
         else
-            return stack.is(item);
+            return stack.is((Item) item);
     }
 
     /**
      * Unfortunately, no infinite lava fuel source on Fabric as there is no way to get the original {@link ItemStack} since the method is static
      */
-    @Redirect(method = "serverTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
+    @Redirect(method = "consumeFuel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
     private static void iwb$modifyLavaBucketBehavior(ItemStack stack, int amount) {
         if (InfinityWaterBucketCommon.hasInfinity(stack) && stack.getItem() == Items.LAVA_BUCKET && InfinityWaterBucketCommon.CONFIG.getInfiniteLavaBucket())
             return;

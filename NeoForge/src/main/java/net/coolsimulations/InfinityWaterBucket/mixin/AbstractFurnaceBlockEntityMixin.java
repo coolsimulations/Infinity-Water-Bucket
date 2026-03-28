@@ -12,18 +12,21 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class AbstractFurnaceBlockEntityMixin {
 
-    @Redirect(method = "burn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z", ordinal = 1))
-    private static boolean injected(ItemStack stack, Item item) {
+    @Redirect(method = "burn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Ljava/lang/Object;)Z", ordinal = 1))
+    private static boolean injected(ItemStack stack, Object item) {
         if (InfinityWaterBucketCommon.hasInfinity(stack))
             return false;
         else
-            return stack.is(item);
+            return stack.is((Item) item);
     }
 
-    @Redirect(method = "serverTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getCraftingRemainder()Lnet/minecraft/world/item/ItemStack;"))
-    private static ItemStack iwb$modifyLavaBucketBehavior(ItemStack item) {
-        if (InfinityWaterBucketCommon.hasInfinity(item) && item.is(Items.LAVA_BUCKET) && InfinityWaterBucketCommon.CONFIG.getInfiniteLavaBucket())
-            return item;
-        return item.getCraftingRemainder();
+    /**
+     * Unfortunately, no infinite lava fuel source on Forge as there is no way to get the original {@link ItemStack} since the method is static
+     */
+    @Redirect(method = "consumeFuel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
+    private static void iwb$modifyLavaBucketBehavior(ItemStack stack, int amount) {
+        if (InfinityWaterBucketCommon.hasInfinity(stack) && stack.getItem() == Items.LAVA_BUCKET && InfinityWaterBucketCommon.CONFIG.getInfiniteLavaBucket())
+            return;
+        stack.shrink(1);
     }
 }

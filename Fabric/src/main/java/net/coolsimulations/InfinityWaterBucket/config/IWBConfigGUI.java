@@ -8,7 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class IWBConfigGUI {
@@ -23,7 +23,7 @@ public class IWBConfigGUI {
             IWBConfig.load(IWBConfig.getFile());
         });
 
-        builder.setDefaultBackgroundTexture(ResourceLocation.withDefaultNamespace("textures/block/tube_coral_block.png"));
+        builder.setDefaultBackgroundTexture(Identifier.withDefaultNamespace("textures/block/tube_coral_block.png"));
 
         ConfigCategory common = builder.getOrCreateCategory(Component.translatable(InfinityWaterBucketCommon.CONFIG.getTranslationKey("common")));
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();

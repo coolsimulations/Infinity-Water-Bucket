@@ -2,10 +2,13 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven-publish'
-    id 'fabric-loom' version '1.10-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
 }
 base {
     archivesName = "${mod_name}-Fabric-${minecraft_version}-${mod_version}".replace(' ', '-')
+    tasks.withType(AbstractTestTask).configureEach {
+        failOnNoDiscoveredTests = false
+    }
 }
 
 sourceSets {
@@ -26,12 +29,11 @@ sourceSets {
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}+${minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}+${minecraft_version}"
     implementation "com.google.code.findbugs:jsr305:3.0.1"
-    modImplementation "com.terraformersmc:modmenu:${modmenu_version}"
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${cloth_version}") {
+    implementation "com.terraformersmc:modmenu:${modmenu_version}"
+    implementation("me.shedaniel.cloth:cloth-config-fabric:${cloth_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
     implementation project(":Common")
@@ -40,9 +42,6 @@ dependencies {
 loom {
     if (project(":Common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
         accessWidenerPath.set(project(":Common").file("src/main/resources/${mod_id}.accesswidener"))
-    }
-    mixin {
-        defaultRefmapName.set("${mod_id}.refmap.json")
     }
     runs {
         client {
